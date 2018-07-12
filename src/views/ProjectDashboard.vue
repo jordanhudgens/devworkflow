@@ -2,7 +2,7 @@
   <div>
     Project Dashboard
 
-    <div v-for="project in projects" :key="project.id">
+    <div v-for="project in projects" :key="project.id" class="project-card">
       <div>
         {{ project.title }}
       </div>
@@ -41,6 +41,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+@import url('./../styles/project-card.scss');
 </style>
