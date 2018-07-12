@@ -1,3 +1,11 @@
 .project-card {
   background-color: red;
+  width: 266px;
+  padding: 20px;
+  margin: 20px 20px 20px 0px;
+  border-radius: 8px;
+
+  .metadata {
+    height: 180px;
+  }
 }

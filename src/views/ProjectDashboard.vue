@@ -2,13 +2,30 @@
   <div>
     Project Dashboard
 
-    <div v-for="project in projects" :key="project.id" class="project-card">
-      <div>
-        {{ project.title }}
-      </div>
+    <div class="project-cards-wrapper">
+      <div v-for="project in projects" :key="project.id" class="project-card">
+        <div class="metadata">
+          <div>
+            {{ project.title }}
+          </div>
 
-      <div>
-        {{ project.mainObjective }}
+          <div>
+            {{ project.mainObjective }}
+          </div>
+        </div>
+
+        <div class="line-items">
+          <div class="line-item">Wireframes</div>
+          <div class="line-item">Sitemap</div>
+          <div class="line-item">User Stories</div>
+          <div class="line-item">UML Diagrams</div>
+          <div class="line-item">Hi-Res Designs</div>
+          <div class="line-item">Logo/Images</div>
+          <div class="line-item">Frontend Implementation</div>
+          <div class="line-item">Backend API</div>
+          <div class="line-item">Automated Tests</div>
+          <div class="line-item">Deployment</div>
+        </div>
       </div>
     </div>
   </div>
@@ -43,4 +60,8 @@ export default {
 
 <style lang="scss">
 @import url('./../styles/project-card.scss');
+
+.project-cards-wrapper {
+  display: flex;
+}
 </style>
