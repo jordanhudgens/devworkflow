@@ -1,6 +1,9 @@
 <template>
   <div>
     Project Dashboard
+    <modal name="new-project">
+      hello, world!
+    </modal>
 
     <div class="project-cards-wrapper">
       <div class="new-project" @click="newProject">
@@ -65,7 +68,7 @@ export default {
   },
   methods: {
     newProject() {
-      console.log('Loading modal...')
+      this.$modal.show('new-project');
     }
   }
 }
@@ -74,4 +77,5 @@ export default {
 <style lang="scss">
 @import url('./../styles/project-dashboard.scss');
 @import url('./../styles/project-card.scss');
+@import url('./../styles/modal.scss');
 </style>
