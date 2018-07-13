@@ -2,6 +2,11 @@
   display: flex;
 
   .line-items {
-    padding-top: 180px;
+    padding-top: 170px;
+
+    .line-item {
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
   }
 }
