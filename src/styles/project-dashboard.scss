@@ -12,11 +12,18 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    transition: background-color 0.5s;
+    transition: font-size 0.5s;
 
     .icon {
       margin-top: 20px;
       font-size: 2em;
     }
+  }
+
+  .new-project:hover {
+    font-size: 1.2em;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   .line-items {
