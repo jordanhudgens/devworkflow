@@ -3,7 +3,7 @@
     Project Dashboard
 
     <div class="project-cards-wrapper">
-      <div class="new-project">
+      <div class="new-project" @click="newProject">
         <div class='title'>New Project</div>
 
         <div class="icon">
@@ -61,6 +61,11 @@ export default {
           mainObjective: 'Content for the main objective for project 3 and testing out a little longer main objective to see what that looks like'
         }
       ]
+    }
+  },
+  methods: {
+    newProject() {
+      console.log('Loading modal...')
     }
   }
 }
