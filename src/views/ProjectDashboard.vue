@@ -3,6 +3,10 @@
     Project Dashboard
 
     <div class="project-cards-wrapper">
+      <div class="new-project">
+        New Project
+      </div>
+
       <div v-for="project in projects" :key="project.id" class="project-card">
         <div class="metadata">
           <div class='title'>
