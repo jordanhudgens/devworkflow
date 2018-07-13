@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 body {
   padding: 20px 40px 20px 40px;
   height: 100vh;
@@ -34,6 +36,9 @@ body {
 }
 
 #nav {
+  .nav-link {
+    margin-right: 20px;
+  }
   a {
     font-weight: bold;
     color: white;

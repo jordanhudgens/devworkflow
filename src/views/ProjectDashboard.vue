@@ -5,11 +5,11 @@
     <div class="project-cards-wrapper">
       <div v-for="project in projects" :key="project.id" class="project-card">
         <div class="metadata">
-          <div>
+          <div class='title'>
             {{ project.title }}
           </div>
 
-          <div>
+          <div class="main-objective">
             {{ project.mainObjective }}
           </div>
         </div>
@@ -59,9 +59,6 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('./../styles/project-dashboard.scss');
 @import url('./../styles/project-card.scss');
-
-.project-cards-wrapper {
-  display: flex;
-}
 </style>
