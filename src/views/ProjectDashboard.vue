@@ -4,7 +4,11 @@
 
     <div class="project-cards-wrapper">
       <div class="new-project">
-        New Project
+        <div class='title'>New Project</div>
+
+        <div class="icon">
+          <i class="fas fa-plus"></i>
+        </div>
       </div>
 
       <div v-for="project in projects" :key="project.id" class="project-card">
