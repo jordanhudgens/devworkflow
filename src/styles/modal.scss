@@ -1,3 +1,8 @@
+@import "./variables.scss";
+
 .v--modal {
-  color: red;
+  color: $charcoal;
+  background-color: $offwhite;
+  border-radius: 8px !important;
+  padding: 20px !important;
 }
