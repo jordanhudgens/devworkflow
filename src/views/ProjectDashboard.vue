@@ -1,8 +1,8 @@
 <template>
   <div>
     Project Dashboard
-    <modal name="new-project">
-      hello, world!
+    <modal name="new-project" class="new-project-modal">
+      <div class="title">New Project Info</div>
     </modal>
 
     <div class="project-cards-wrapper">
