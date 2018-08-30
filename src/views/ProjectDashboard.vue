@@ -3,6 +3,26 @@
     Project Dashboard
     <modal name="new-project" class="new-project-modal">
       <div class="title">New Project Info</div>
+
+      <form @submit.prevent="createNewProject" class="form-wrapper">
+        <div>
+          <input type="text" v-model="project.title" placeholder="Title" class="full-width-element">
+        </div>
+
+        <div>
+          <input type="text" v-model="project.mainObjective" placeholder="Main objective" class="full-width-element">
+        </div>
+
+        <div class="form-buttons-wrapper">
+          <div class="link-btn btn-cancel">
+            <button>Cancel</button>
+          </div>
+
+          <div class="link-btn btn-primary">
+            <input type="submit" value="Save">
+          </div>
+        </div>
+      </form>
     </modal>
 
     <div class="project-cards-wrapper">
@@ -47,6 +67,10 @@ export default {
   name: 'ProjectDashboard',
   data() {
     return {
+      project: {
+        title: null,
+        mainObjective: null
+      },
       projects: [
         {
           id: 1,
@@ -69,6 +93,9 @@ export default {
   methods: {
     newProject() {
       this.$modal.show('new-project');
+    },
+    createNewProject() {
+      console.log('Creating new project');
     }
   }
 }
