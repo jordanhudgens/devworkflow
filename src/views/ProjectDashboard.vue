@@ -115,4 +115,5 @@ export default {
 @import url('./../styles/modal.scss');
 @import url('./../styles/forms.scss');
 @import url('./../styles/helpers.scss');
+@import url('./../styles/buttons.scss');
 </style>
