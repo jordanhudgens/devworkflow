@@ -3,6 +3,9 @@
     Project Dashboard
     <modal name="new-project" class="new-project-modal">
       <div class="title">New Project Info</div>
+      <div class="small-green-line"></div>
+
+      <div class="spacer30"></div>
 
       <form @submit.prevent="createNewProject" class="form-wrapper">
         <div>
@@ -105,4 +108,6 @@ export default {
 @import url('./../styles/project-dashboard.scss');
 @import url('./../styles/project-card.scss');
 @import url('./../styles/modal.scss');
+@import url('./../styles/forms.scss');
+@import url('./../styles/helpers.scss');
 </style>

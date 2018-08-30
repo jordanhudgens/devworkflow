@@ -1,0 +1,12 @@
+@import "./variables.scss";
+
+.small-green-line {
+  width: 30px;
+  height: 3px;
+  border-radius: 10px;
+  background-color: $teal;
+}
+
+.spacer30 {
+  height: 30px;
+}
