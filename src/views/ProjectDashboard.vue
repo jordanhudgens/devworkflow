@@ -16,13 +16,15 @@
           <input type="text" v-model="project.mainObjective" placeholder="Main objective" class="full-width-element">
         </div>
 
+        <div class="spacer50"></div>
+
         <div class="form-buttons-wrapper">
           <div class="link-btn btn-cancel">
             <button>Cancel</button>
           </div>
 
           <div class="link-btn btn-primary">
-            <input type="submit" value="Save">
+            <button type="submit">Save</button>
           </div>
         </div>
       </form>
