@@ -20,7 +20,7 @@
 
         <div class="form-buttons-wrapper">
           <div class="link-btn btn-cancel">
-            <button>Cancel</button>
+            <button @click.prevent="closeModal">Cancel</button>
           </div>
 
           <div class="link-btn btn-primary">
@@ -98,6 +98,9 @@ export default {
   methods: {
     newProject() {
       this.$modal.show('new-project');
+    },
+    closeModal() {
+      this.$modal.hide('new-project');
     },
     createNewProject() {
       console.log('Creating new project');
