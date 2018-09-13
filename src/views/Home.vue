@@ -1,7 +1,17 @@
 <template>
   <div class="home">
-    <SignIn />
-    <Register />
+    <div class="left-column">
+      <h1>DevWorkflow</h1>
+
+      <p>A simple program to stay organized as a software engineer</p>
+
+      <p>Login or sign up to get started</p>
+    </div>
+
+    <div class="right-column">
+      <SignIn />
+      <Register />
+    </div>
   </div>
 </template>
 
@@ -17,3 +27,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import url('./../styles/home.scss');
+</style>
