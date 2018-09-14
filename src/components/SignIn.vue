@@ -5,9 +5,11 @@
         <div class='title'>
           Login
         </div>
+
+        <div class="small-green-line"></div>
       </div>
 
-      <div class="line-items">
+      <div class="auth-form">
         Form goes here....
       </div>
     </div>
@@ -24,7 +26,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 @import url('./../styles/project-card.scss');
 @import url('./../styles/forms.scss');
 @import url('./../styles/helpers.scss');

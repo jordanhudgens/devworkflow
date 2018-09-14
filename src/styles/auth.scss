@@ -1,4 +1,16 @@
 .auth-card {
   width: 362px !important;
   height: 475px !important;
+
+  .metadata {
+    height: 100px !important;
+
+    .small-green-line {
+      margin-left: 20px !important;
+    }
+  }
+
+  .auth-form {
+    margin-top: 110px;
+  }
 }
