@@ -32,4 +32,5 @@ export default {
 @import url('./../styles/helpers.scss');
 @import url('./../styles/buttons.scss');
 @import url('./../styles/auth.scss');
+@import url('./../styles/forms.scss');
 </style>
