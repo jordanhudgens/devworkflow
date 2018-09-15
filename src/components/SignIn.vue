@@ -11,17 +11,17 @@
 
       <div class="auth-form">
         <form @submit.prevent="login" class="form-wrapper">
-          <div>
-            <label for="login-email">Email</label>
-            <input type="text" id="login-email" v-model="user.email" placeholder="Email" class="full-width-element">
-          </div>
+          <div class="input-elements">
+            <div class="form-element-group">
+              <label for="login-email">Email</label>
+              <input type="text" id="login-email" v-model="user.email" placeholder="Email" class="full-width-element">
+            </div>
 
-          <div>
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" v-model="user.password" placeholder="Password" class="full-width-element">
+            <div class="form-element-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" v-model="user.password" placeholder="Password" class="full-width-element">
+            </div>
           </div>
-
-          <div class="spacer50"></div>
 
           <div class="form-buttons-wrapper">
             <div class="link-btn btn-primary">

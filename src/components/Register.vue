@@ -11,22 +11,22 @@
 
       <div class="auth-form">
         <form @submit.prevent="register" class="form-wrapper">
-          <div>
-            <label for="register-name">Name</label>
-            <input type="text" id="register-name" v-model="user.name" placeholder="Name" class="full-width-element">
-          </div>
+          <div class="input-elements">
+            <div class="form-element-group">
+              <label for="register-name">Name</label>
+              <input type="text" id="register-name" v-model="user.name" class="full-width-element">
+            </div>
 
-          <div>
-            <label for="register-email">Email</label>
-            <input type="email" id="register-email" v-model="user.email" placeholder="Email" class="full-width-element">
-          </div>
+            <div class="form-element-group">
+              <label for="register-email">Email</label>
+              <input type="email" id="register-email" v-model="user.email" class="full-width-element">
+            </div>
 
-          <div>
-            <label for="register-password">Password</label>
-            <input type="password" id="register-password" v-model="user.password" placeholder="Password" class="full-width-element">
+            <div class="form-element-group">
+              <label for="register-password">Password</label>
+              <input type="password" id="register-password" v-model="user.password" class="full-width-element">
+            </div>
           </div>
-
-          <div class="spacer50"></div>
 
           <div class="form-buttons-wrapper">
             <div class="link-btn btn-primary">
