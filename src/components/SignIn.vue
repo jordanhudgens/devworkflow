@@ -12,13 +12,13 @@
       <div class="auth-form">
         <form @submit.prevent="login" class="form-wrapper">
           <div>
-            <label for="email">Email</label>
-            <input type="text" id="email" v-model="user.email" placeholder="Email" class="full-width-element">
+            <label for="login-email">Email</label>
+            <input type="text" id="login-email" v-model="user.email" placeholder="Email" class="full-width-element">
           </div>
 
           <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" v-model="user.password" placeholder="Password" class="full-width-element">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" v-model="user.password" placeholder="Password" class="full-width-element">
           </div>
 
           <div class="spacer50"></div>
