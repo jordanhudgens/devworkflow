@@ -9,21 +9,20 @@
     </div>
 
     <div class="right-column">
-      <SignIn />
-      <Register />
+      <Auth formType="login" />
+      <Auth formType="register" />
     </div>
   </div>
 </template>
 
 <script>
-import SignIn from '@/components/SignIn.vue'
-import Register from '@/components/Register.vue'
+import Auth from '@/components/Auth'
 
 export default {
   name: 'home',
+
   components: {
-    SignIn,
-    Register
+    Auth
   }
 }
 </script>

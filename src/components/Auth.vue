@@ -3,34 +3,34 @@
     <div class="project-card auth-card">
       <div class="metadata">
         <div class='title'>
-          Register
+          {{ formattedTitle }}
         </div>
 
         <div class="small-green-line"></div>
       </div>
 
       <div class="auth-form">
-        <form @submit.prevent="register" class="form-wrapper">
+        <form @submit.prevent="handleFormSubmission" class="form-wrapper">
           <div class="input-elements">
-            <div class="form-element-group">
+            <div v-if="formType === 'register'" class="form-element-group">
               <label for="register-name">Name</label>
-              <input type="text" id="register-name" v-model="user.name" class="full-width-element">
+              <input type="text" :id="formType + '-name'" v-model="user.name" class="full-width-element">
             </div>
 
             <div class="form-element-group">
-              <label for="register-email">Email</label>
-              <input type="email" id="register-email" v-model="user.email" class="full-width-element">
+              <label :for="formType + '-email'">Email</label>
+              <input type="email" :id="formType + '-email'" v-model="user.email" class="full-width-element">
             </div>
 
             <div class="form-element-group">
-              <label for="register-password">Password</label>
-              <input type="password" id="register-password" v-model="user.password" class="full-width-element">
+              <label :for="formType + '-password'">Password</label>
+              <input type="password" :id="formType + '-password'" v-model="user.password" class="full-width-element">
             </div>
           </div>
 
           <div class="form-buttons-wrapper">
             <div class="link-btn btn-primary">
-              <button type="submit">Register</button>
+              <button type="submit">{{ formattedTitle }}</button>
             </div>
           </div>
         </form>
@@ -42,7 +42,8 @@
 
 <script>
 export default {
-  name: 'Register',
+  name: 'Auth',
+
   data() {
     return {
       user: {
@@ -50,6 +51,22 @@ export default {
         email: null,
         password: null
       }
+    }
+  },
+
+  props: {
+    formType: String
+  },
+
+  computed: {
+    formattedTitle: function() {
+      return this.formType[0].toUpperCase() + this.formType.slice(1);
+    }
+  },
+
+  methods: {
+    handleFormSubmission() {
+      console.log("Form submitted")
     }
   }
 }
