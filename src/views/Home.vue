@@ -9,8 +9,8 @@
     </div>
 
     <div class="right-column">
-      <Auth formType="login" @register="handleSuccessfulAuth" />
-      <Auth formType="register" @login="handleSuccessfulAuth" />
+      <Auth formType="login" @login="handleSuccessfulAuth" />
+      <Auth formType="register" @register="handleSuccessfulAuth" />
     </div>
   </div>
 </template>
@@ -28,6 +28,9 @@ export default {
   methods: {
     handleSuccessfulAuth() {
       console.log("Logging in!!!")
+      this.$router.push({
+        name: 'ProjectDashboard',
+      });
     }
   }
 }

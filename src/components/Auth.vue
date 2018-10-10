@@ -77,8 +77,7 @@ export default {
 
     registerUser() {
       axios
-        .post(
-        'https://devworkflow-api.herokuapp.com/registrations',
+        .post('https://devworkflow-api.herokuapp.com/registrations',
         {
           user: {
             email: this.user.email,
@@ -90,7 +89,6 @@ export default {
         { withCredentials: true },
       )
         .then(response => {
-          console.log("register res", response.data);
           this.$emit('register', response.data);
         })
         .catch(error => {
@@ -111,7 +109,6 @@ export default {
         { withCredentials: true },
       )
         .then(response => {
-          console.log("login res", response.data);
           this.$emit('login', response.data);
         })
         .catch(error => {
