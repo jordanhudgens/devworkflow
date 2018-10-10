@@ -32,6 +32,10 @@ export default {
           this.$router.push({
             name: 'ProjectDashboard',
           });
+        } else {
+          this.$router.push({
+            name: 'home',
+          });
         }
 
         this.isLoading = false;
