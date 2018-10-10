@@ -1,6 +1,5 @@
 <template>
   <div>
-    Project Dashboard
     <modal name="new-project" class="new-project-modal">
       <div class="title">New Project Info</div>
       <div class="small-green-line"></div>
@@ -29,6 +28,10 @@
         </div>
       </form>
     </modal>
+
+    <a class="link" @click.prevent="toggleStatus">
+      {{ statusLinkText }}
+    </a>
 
     <div class="project-cards-wrapper">
       <div class="new-project" @click="newProject">
@@ -72,6 +75,7 @@ export default {
   name: 'ProjectDashboard',
   data() {
     return {
+      statusLinkText: 'Archived',
       project: {
         title: null,
         mainObjective: null
@@ -99,12 +103,22 @@ export default {
     newProject() {
       this.$modal.show('new-project');
     },
+
     closeModal() {
       this.$modal.hide('new-project');
     },
+
     createNewProject() {
       console.log('Creating new project');
-    }
+    },
+
+    toggleStatus() {
+      if (this.statusLinkText === 'Archived') {
+        this.statusLinkText = 'Active';
+      } else {
+        this.statusLinkText = 'Archived';
+      }
+    },
   }
 }
 </script>
