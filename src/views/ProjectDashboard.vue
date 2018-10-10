@@ -110,6 +110,7 @@ export default {
 
     createNewProject() {
       console.log('Creating new project');
+      this.closeModal();
     },
 
     toggleStatus() {
