@@ -66,7 +66,19 @@ export default {
 
   methods: {
     handleFormSubmission() {
-      console.log("Form submitted")
+      if (this.formType === 'login') {
+        this.loginUser();
+      } else {
+        this.registerUser();
+      }
+    },
+
+    registerUser() {
+      console.log("register", this.user.email, this.user.name, this.user.password);
+    },
+
+    loginUser() {
+      console.log("login", this.user.email, this.user.password)
     }
   }
 }
