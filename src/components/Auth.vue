@@ -74,12 +74,50 @@ export default {
     },
 
     registerUser() {
-      console.log("register", this.user.email, this.user.name, this.user.password);
+      axios
+        .post(
+        'https://devworkflow-api.herokuapp.com/registrations',
+        {
+          user: {
+            email: this.user.email,
+            name: this.user.name,
+            password: this.user.password,
+            password_confirmation: this.user.password,
+          },
+        },
+        { withCredentials: true },
+      )
+        .then(response => {
+          console.log("register res", response.data);
+          this.$emit('register', response.data);
+        })
+        .catch(error => {
+          this.$emit('registrationError', error);
+        });
     },
 
     loginUser() {
-      console.log("login", this.user.email, this.user.password)
-    }
+      axios
+        .post(
+        'https://devworkflow-api.herokuapp.com/sessions',
+        {
+          user: {
+            email: this.user.email,
+            password: this.user.password,
+          },
+        },
+        { withCredentials: true },
+      )
+        .then(response => {
+          console.log("login res", response.data);
+          this.$emit('login', response.data);
+        })
+        .catch(error => {
+          console.log("error", error);
+          this.$emit('authError', error);
+        });
+    },
+
   }
 }
 </script>

@@ -9,8 +9,8 @@
     </div>
 
     <div class="right-column">
-      <Auth formType="login" />
-      <Auth formType="register" />
+      <Auth formType="login" @register="handleSuccessfulAuth" />
+      <Auth formType="register" @login="handleSuccessfulAuth" />
     </div>
   </div>
 </template>
@@ -23,6 +23,12 @@ export default {
 
   components: {
     Auth
+  },
+
+  methods: {
+    handleSuccessfulAuth() {
+      console.log("Logging in!!!")
+    }
   }
 }
 </script>
