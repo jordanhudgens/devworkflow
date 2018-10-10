@@ -12,7 +12,7 @@
         </div>
 
         <div>
-          <input type="text" v-model="project.mainObjective" placeholder="Main objective" class="full-width-element">
+          <input type="text" v-model="project.main_objective" placeholder="Main objective" class="full-width-element">
         </div>
 
         <div class="spacer50"></div>
@@ -49,7 +49,7 @@
           </div>
 
           <div class="main-objective">
-            {{ project.mainObjective }}
+            {{ project.main_objective }}
           </div>
         </div>
 
@@ -71,35 +71,35 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'ProjectDashboard',
+
+  mounted() {
+    this.getProjects();
+  },
+
   data() {
     return {
       statusLinkText: 'Archived',
-      project: {
-        title: null,
-        mainObjective: null
-      },
-      projects: [
-        {
-          id: 1,
-          title: 'First Project',
-          mainObjective: 'Content for the main objective'
-        },
-        {
-          id: 2,
-          title: 'Second Project',
-          mainObjective: 'Content for the main objective for project 2'
-        },
-        {
-          id: 3,
-          title: 'Third Project',
-          mainObjective: 'Content for the main objective for project 3 and testing out a little longer main objective to see what that looks like'
-        }
-      ]
+      project: {},
+      projects: []
     }
   },
   methods: {
+    getProjects() {
+      console.log("Getting projects...")
+      axios
+        .get(`https://devworkflow-api.herokuapp.com/projects`, { withCredentials: true })
+        .then(response => {
+          this.projects.push(...response.data.projects);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
     newProject() {
       this.$modal.show('new-project');
     },
