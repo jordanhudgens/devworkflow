@@ -8,11 +8,11 @@
 
       <form @submit.prevent="createNewProject" class="form-wrapper">
         <div>
-          <input type="text" v-model="project.title" placeholder="Title" class="full-width-element">
+          <input type="text" v-model="newProject.title" placeholder="Title" class="full-width-element">
         </div>
 
         <div>
-          <input type="text" v-model="project.main_objective" placeholder="Main objective" class="full-width-element">
+          <input type="text" v-model="newProject.main_objective" placeholder="Main objective" class="full-width-element">
         </div>
 
         <div class="spacer50"></div>
@@ -34,7 +34,7 @@
     </a>
 
     <div class="project-cards-wrapper">
-      <div class="new-project" @click="newProject">
+      <div class="new-project" @click="newProjectModal">
         <div class='title'>New Project</div>
 
         <div class="icon">
@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       statusLinkText: 'Archived',
-      project: {},
+      newProject: {},
       projects: []
     }
   },
@@ -100,7 +100,7 @@ export default {
         });
     },
 
-    newProject() {
+    newProjectModal() {
       this.$modal.show('new-project');
     },
 
@@ -109,8 +109,25 @@ export default {
     },
 
     createNewProject() {
-      console.log('Creating new project');
-      this.closeModal();
+      axios
+        .post(
+        'https://devworkflow-api.herokuapp.com/projects',
+        {
+          project: {
+            title: this.newProject.title,
+            main_objective: this.newProject.main_objective,
+          },
+        },
+        { withCredentials: true },
+      )
+        .then(response => {
+          console.log("new project response", response);
+          this.projects.push(this.newProject);
+          this.closeModal();
+        })
+        .catch(error => {
+          console.log('errorrr', error);
+        });
     },
 
     toggleStatus() {
