@@ -37,7 +37,7 @@
     </div>
 
     <transition name="fade">
-      <a v-if="showArchiveLink" class="archive-link" @click.prevent="archiveProject">
+      <a v-if="showArchiveLink" class="archive-link" @click.prevent="archiveProject(project.id)">
         Archive Project
       </a>
     </transition>
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'ProjectCard',
 
@@ -67,8 +69,19 @@ export default {
       }
     },
 
-    archiveProject() {
-      console.log('archive...')
+    archiveProject(projectId) {
+      axios
+        .patch(
+        `https://devworkflow-api.herokuapp.com/archived_projects/${projectId}`,
+        {},
+        { withCredentials: true },
+      )
+        .then(response => {
+          this.$emit('archiveProject', projectId);
+        })
+        .catch(error => {
+          console.log('errorrr', error);
+        });
     }
   }
 }

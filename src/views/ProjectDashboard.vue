@@ -14,7 +14,7 @@
       </div>
 
       <div v-for="project in projects" :key="project.id">
-        <ProjectCard :project="project" />
+        <ProjectCard :project="project" @archiveProject="archiveProject" />
       </div>
     </div>
   </div>
@@ -58,6 +58,14 @@ export default {
 
     newProjectModal() {
       this.activeModal = true;
+    },
+
+    archiveProject(projectId) {
+      this.projects = this.projects.filter(project => {
+        if (project.id != projectId) {
+          return project;
+        }
+      })
     },
 
     getArchivedProjects() {
