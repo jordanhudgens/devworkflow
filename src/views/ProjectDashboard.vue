@@ -5,7 +5,7 @@
     <ProjectDashboardNav :statusLinkText="statusLinkText" @toggle="toggleStatus" />
 
     <div class="project-cards-wrapper">
-      <div class="new-project" @click="newProjectModal">
+      <div class="new-project" @click="newProjectModal" v-if="statusLinkText === 'Archived'">
         <div class='title'>New Project</div>
 
         <div class="icon">
