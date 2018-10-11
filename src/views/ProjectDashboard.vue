@@ -134,7 +134,7 @@ export default {
       )
         .then(response => {
           console.log("new project response", response);
-          this.projects.push(this.newProject);
+          this.projects.unshift(this.newProject);
           this.newProject = {};
           this.closeModal();
         })
