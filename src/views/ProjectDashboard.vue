@@ -1,37 +1,6 @@
 <template>
   <div class="project-dashboard-wrapper">
-    <modal name="new-project" class="new-project-modal">
-      <div class="title">New Project Info</div>
-      <div class="small-green-line"></div>
-
-      <div class="spacer30"></div>
-
-      <form @submit.prevent="createNewProject" class="form-wrapper">
-        <div>
-          <input type="text" v-model="newProject.title" :maxlength="validationRules.title" placeholder="Title" class="full-width-element">
-          <div class="text-countdown" v-if="newProject.title" v-text="(validationRules.title - newProject.title.length) + ' characters left'"></div>
-          <div class="text-countdown" v-else>{{ validationRules.title }} characters max</div>
-        </div>
-
-        <div>
-          <input type="text" v-model="newProject.main_objective" :maxlength="validationRules.mainObjective" placeholder="Main objective" class="full-width-element">
-          <div class="text-countdown" v-if="newProject.main_objective" v-text="(validationRules.mainObjective - newProject.main_objective.length) + ' characters left'"></div>
-          <div class="text-countdown" v-else>{{ validationRules.mainObjective }} characters max</div>
-        </div>
-
-        <div class="spacer50"></div>
-
-        <div class="form-buttons-wrapper">
-          <div class="link-btn btn-cancel">
-            <button @click.prevent="closeModal">Cancel</button>
-          </div>
-
-          <div class="link-btn btn-primary">
-            <button type="submit">Save</button>
-          </div>
-        </div>
-      </form>
-    </modal>
+    <NewProject :activeModal="activeModal" @addNewProject="addNewProject" @resetActiveModal="resetActiveModal" />
 
     <div class="fixed-nav-container">
       <div class="project-nav">
@@ -89,6 +58,7 @@
 
 <script>
 import axios from 'axios';
+import NewProject from '@/components/NewProject';
 
 export default {
   name: 'ProjectDashboard',
@@ -100,15 +70,28 @@ export default {
   data() {
     return {
       statusLinkText: 'Archived',
-      newProject: {},
       projects: [],
-      validationRules: {
-        mainObjective: 130,
-        title: 55
-      }
+      activeModal: false
     }
   },
+
+  components: {
+    NewProject
+  },
+
   methods: {
+    addNewProject(project) {
+      this.projects.unshift(project);
+    },
+
+    resetActiveModal(data) {
+      this.activeModal = false;
+    },
+
+    newProjectModal() {
+      this.activeModal = true;
+    },
+
     signOut() {
       axios
         .delete(`https://devworkflow-api.herokuapp.com/logout`, {
@@ -143,37 +126,6 @@ export default {
         })
         .catch(error => {
           console.log(error);
-        });
-    },
-
-    newProjectModal() {
-      this.$modal.show('new-project');
-    },
-
-    closeModal() {
-      this.$modal.hide('new-project');
-    },
-
-    createNewProject() {
-      axios
-        .post(
-        'https://devworkflow-api.herokuapp.com/projects',
-        {
-          project: {
-            title: this.newProject.title,
-            main_objective: this.newProject.main_objective,
-          },
-        },
-        { withCredentials: true },
-      )
-        .then(response => {
-          console.log("new project response", response);
-          this.projects.unshift(this.newProject);
-          this.newProject = {};
-          this.closeModal();
-        })
-        .catch(error => {
-          console.log('errorrr', error);
         });
     },
 
