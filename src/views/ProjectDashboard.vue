@@ -124,8 +124,18 @@ export default {
         });
     },
 
+    getArchivedProjects() {
+      axios
+        .get(`https://devworkflow-api.herokuapp.com/archived_projects`, { withCredentials: true })
+        .then(response => {
+          this.projects.push(...response.data.projects);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
     getProjects() {
-      console.log("Getting projects...")
       axios
         .get(`https://devworkflow-api.herokuapp.com/projects`, { withCredentials: true })
         .then(response => {
@@ -168,9 +178,13 @@ export default {
     },
 
     toggleStatus() {
+      this.projects = [];
+
       if (this.statusLinkText === 'Archived') {
+        this.getArchivedProjects();
         this.statusLinkText = 'Active';
       } else {
+        this.getProjects();
         this.statusLinkText = 'Archived';
       }
     },
