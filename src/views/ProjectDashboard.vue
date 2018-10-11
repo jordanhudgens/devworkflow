@@ -123,6 +123,7 @@ export default {
         .then(response => {
           console.log("new project response", response);
           this.projects.push(this.newProject);
+          this.newProject = {};
           this.closeModal();
         })
         .catch(error => {
