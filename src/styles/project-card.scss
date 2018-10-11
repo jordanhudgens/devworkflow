@@ -1,9 +1,11 @@
+@import "./variables.scss";
+
 .project-card {
   background-color: white;
   color: #2a2828;
   position: relative;
   width: 300px;
-  padding: 20px;
+  padding: 20px 20px 42px 20px;
   margin: 20px 20px 20px 0px;
   border-radius: 8px;
 
@@ -32,6 +34,28 @@
     .main-objective {
       padding: 0px 20px 20px 20px;
       font-size: 0.9em;
+    }
+  }
+
+  .archive-link {
+    height: 42px;
+    width: 100%;
+    position: absolute;
+    background-color: $red;
+    margin-left: -20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 700;
+    transition: all 0.5s ease-in-out;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $darkred;
     }
   }
 }

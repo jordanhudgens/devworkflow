@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      <div v-for="project in projects" :key="project.id" class="project-card">
+      <div v-for="project in projects" :key="project.id">
         <ProjectCard :project="project" />
       </div>
     </div>

@@ -34,5 +34,5 @@
 
 .incompleted-circle {
   @include circle;
-  background-color: darkred;
+  background-color: $red;
 }
