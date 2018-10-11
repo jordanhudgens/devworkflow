@@ -29,9 +29,19 @@
       </form>
     </modal>
 
-    <a class="link" @click.prevent="toggleStatus">
-      {{ statusLinkText }}
-    </a>
+    <div class="project-nav">
+      <div class="left">
+        <a class="link" @click.prevent="toggleStatus">
+          {{ statusLinkText }}
+        </a>
+      </div>
+
+      <div class="right">
+        <a class="link" @click.prevent="toggleStatus">
+          {{ statusLinkText }}
+        </a>
+      </div>
+    </div>
 
     <div class="project-cards-wrapper">
       <div class="new-project" @click="newProjectModal">
