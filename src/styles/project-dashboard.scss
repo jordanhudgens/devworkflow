@@ -1,6 +1,5 @@
 .project-cards-wrapper {
-  display: flex;
-  flex-flow: wrap;
+  display: inline-flex;
 
   .new-project {
     height: 705px;

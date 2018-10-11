@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="project-dashboard-wrapper">
     <modal name="new-project" class="new-project-modal">
       <div class="title">New Project Info</div>
       <div class="small-green-line"></div>
