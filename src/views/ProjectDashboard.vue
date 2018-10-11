@@ -40,8 +40,21 @@
         </div>
 
         <div class="line-items">
-          <div class="line-item">Wireframes</div>
-          <div class="line-item">Sitemap</div>
+
+          <div class="line-item">
+            <span class="completed-circle"></span>
+            <span class="title">
+              Wireframes
+            </span>
+          </div>
+
+          <div class="line-item">
+            <span class="incompleted-circle"></span>
+            <span class="title">
+              Sitemap
+            </span>
+          </div>
+
           <div class="line-item">User Stories</div>
           <div class="line-item">UML Diagrams</div>
           <div class="line-item">Hi-Res Designs</div>

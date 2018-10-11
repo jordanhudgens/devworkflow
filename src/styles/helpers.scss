@@ -18,3 +18,21 @@
 .spacer80 {
   height: 80px;
 }
+
+@mixin circle {
+  position: absolute;
+  margin-top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.completed-circle {
+  @include circle;
+  background-color: #22dab6;
+}
+
+.incompleted-circle {
+  @include circle;
+  background-color: darkred;
+}
