@@ -1,5 +1,6 @@
 .project-cards-wrapper {
   display: inline-flex;
+  margin-top: 21px;
 
   .new-project {
     height: 705px;
@@ -37,11 +38,14 @@
   }
 }
 
-.project-nav {
-  display: flex;
-  justify-content: space-between;
+.fixed-nav-container {
+  position: fixed;
+  width: 100vw;
+  padding-right: 100px;
 
-  .right {
-    padding-right: 100px;
+  .project-nav {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 200px;
   }
 }

@@ -29,17 +29,19 @@
       </form>
     </modal>
 
-    <div class="project-nav">
-      <div class="left">
-        <a class="link" @click.prevent="toggleStatus">
-          {{ statusLinkText }}
-        </a>
-      </div>
+    <div class="fixed-nav-container">
+      <div class="project-nav">
+        <div class="left">
+          <a class="link" @click.prevent="toggleStatus">
+            {{ statusLinkText }}
+          </a>
+        </div>
 
-      <div class="right">
-        <a class="link" @click.prevent="toggleStatus">
-          {{ statusLinkText }}
-        </a>
+        <div class="right">
+          <a class="link" @click.prevent="toggleStatus">
+            {{ statusLinkText }}
+          </a>
+        </div>
       </div>
     </div>
 
