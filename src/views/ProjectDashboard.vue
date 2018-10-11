@@ -8,13 +8,15 @@
 
       <form @submit.prevent="createNewProject" class="form-wrapper">
         <div>
-          <input type="text" v-model="newProject.title" placeholder="Title" class="full-width-element">
+          <input type="text" v-model="newProject.title" :maxlength="validationRules.title" placeholder="Title" class="full-width-element">
+          <div class="text-countdown" v-if="newProject.title" v-text="(validationRules.title - newProject.title.length) + ' characters left'"></div>
+          <div class="text-countdown" v-else>{{ validationRules.title }} characters max</div>
         </div>
 
         <div>
-          <input type="text" v-model="newProject.main_objective" :maxlength="maxMainObjectiveCharLength" placeholder="Main objective" class="full-width-element">
-          <div class="text-countdown" v-if="newProject.main_objective" v-text="(maxMainObjectiveCharLength - newProject.main_objective.length) + ' characters left'"></div>
-          <div class="text-countdown" v-else>168 characters max</div>
+          <input type="text" v-model="newProject.main_objective" :maxlength="validationRules.mainObjective" placeholder="Main objective" class="full-width-element">
+          <div class="text-countdown" v-if="newProject.main_objective" v-text="(validationRules.mainObjective - newProject.main_objective.length) + ' characters left'"></div>
+          <div class="text-countdown" v-else>{{ validationRules.mainObjective }} characters max</div>
         </div>
 
         <div class="spacer50"></div>
@@ -100,7 +102,10 @@ export default {
       statusLinkText: 'Archived',
       newProject: {},
       projects: [],
-      maxMainObjectiveCharLength: 168,
+      validationRules: {
+        mainObjective: 130,
+        title: 55
+      }
     }
   },
   methods: {
