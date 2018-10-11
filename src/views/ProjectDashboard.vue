@@ -40,8 +40,9 @@
         </div>
 
         <div class="right">
-          <a class="link" @click.prevent="toggleStatus">
-            {{ statusLinkText }}
+          <a class="link" @click.prevent="logout">
+            <span class="logout-link">Logout</span>
+            <i class="fas fa-sign-out-alt"></i>
           </a>
         </div>
       </div>

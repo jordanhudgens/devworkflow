@@ -36,4 +36,9 @@ body {
   cursor: pointer;
   font-weight: 900;
   font-size: 1.2em;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    color: $teal;
+  }
 }
