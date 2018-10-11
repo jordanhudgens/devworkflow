@@ -27,7 +27,6 @@ export default {
 
   methods: {
     handleSuccessfulAuth() {
-      console.log("Logging in!!!")
       this.$router.push({
         name: 'ProjectDashboard',
       });

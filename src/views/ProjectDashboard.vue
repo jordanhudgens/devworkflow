@@ -2,22 +2,7 @@
   <div class="project-dashboard-wrapper">
     <NewProject :activeModal="activeModal" @addNewProject="addNewProject" @resetActiveModal="resetActiveModal" />
 
-    <div class="fixed-nav-container">
-      <div class="project-nav">
-        <div class="left">
-          <a class="link" @click.prevent="toggleStatus">
-            {{ statusLinkText }}
-          </a>
-        </div>
-
-        <div class="right">
-          <a class="link" @click.prevent="signOut">
-            <span class="logout-link">Logout</span>
-            <i class="fas fa-sign-out-alt"></i>
-          </a>
-        </div>
-      </div>
-    </div>
+    <ProjectDashboardNav :statusLinkText="statusLinkText" @toggle="toggleStatus" />
 
     <div class="project-cards-wrapper">
       <div class="new-project" @click="newProjectModal">
@@ -72,6 +57,7 @@
 <script>
 import axios from 'axios';
 import NewProject from '@/components/NewProject';
+import ProjectDashboardNav from '@/components/ProjectDashboardNav';
 
 export default {
   name: 'ProjectDashboard',
@@ -89,7 +75,8 @@ export default {
   },
 
   components: {
-    NewProject
+    NewProject,
+    ProjectDashboardNav
   },
 
   methods: {
@@ -103,21 +90,6 @@ export default {
 
     newProjectModal() {
       this.activeModal = true;
-    },
-
-    signOut() {
-      axios
-        .delete(`https://devworkflow-api.herokuapp.com/logout`, {
-          withCredentials: true,
-        })
-        .then(response => {
-          this.$router.push({
-            name: 'home',
-          });
-        })
-        .catch(error => {
-          console.log(error);
-        });
     },
 
     getArchivedProjects() {
