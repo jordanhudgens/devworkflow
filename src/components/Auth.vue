@@ -109,7 +109,9 @@ export default {
         { withCredentials: true },
       )
         .then(response => {
-          this.$emit('login', response.data);
+          if (response.data.status === 'created') {
+            this.$emit('login', response.data);
+          }
         })
         .catch(error => {
           console.log("error", error);
