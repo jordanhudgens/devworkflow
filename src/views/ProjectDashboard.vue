@@ -42,7 +42,7 @@
         </div>
 
         <div class="right">
-          <a class="link" @click.prevent="logout">
+          <a class="link" @click.prevent="signOut">
             <span class="logout-link">Logout</span>
             <i class="fas fa-sign-out-alt"></i>
           </a>
@@ -109,6 +109,21 @@ export default {
     }
   },
   methods: {
+    signOut() {
+      axios
+        .delete(`https://devworkflow-api.herokuapp.com/logout`, {
+          withCredentials: true,
+        })
+        .then(response => {
+          this.$router.push({
+            name: 'home',
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
     getProjects() {
       console.log("Getting projects...")
       axios
