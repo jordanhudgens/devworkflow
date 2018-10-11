@@ -12,7 +12,9 @@
         </div>
 
         <div>
-          <input type="text" v-model="newProject.main_objective" placeholder="Main objective" class="full-width-element">
+          <input type="text" v-model="newProject.main_objective" :maxlength="maxMainObjectiveCharLength" placeholder="Main objective" class="full-width-element">
+          <div class="text-countdown" v-if="newProject.main_objective" v-text="(maxMainObjectiveCharLength - newProject.main_objective.length) + ' characters left'"></div>
+          <div class="text-countdown" v-else>168 characters max</div>
         </div>
 
         <div class="spacer50"></div>
@@ -96,7 +98,8 @@ export default {
     return {
       statusLinkText: 'Archived',
       newProject: {},
-      projects: []
+      projects: [],
+      maxMainObjectiveCharLength: 168,
     }
   },
   methods: {
