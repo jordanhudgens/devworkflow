@@ -1,5 +1,5 @@
 <template>
-  <div class="card expanded-card">
+  <div class="project-details-card">
     <h2>
       {{ selectedItemTitle }}
     </h2>

@@ -128,12 +128,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import url('./../styles/project-dashboard.scss');
-@import url('./../styles/project-card.scss');
-@import url('./../styles/modal.scss');
-@import url('./../styles/forms.scss');
-@import url('./../styles/helpers.scss');
-@import url('./../styles/buttons.scss');
-</style>

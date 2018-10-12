@@ -45,5 +45,5 @@ export default {
 
 
 <style lang="scss">
-@import url('./styles/common.scss');
+@import './styles/main.scss';
 </style>

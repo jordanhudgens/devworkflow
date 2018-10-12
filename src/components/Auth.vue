@@ -122,12 +122,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import url('./../styles/project-card.scss');
-@import url('./../styles/forms.scss');
-@import url('./../styles/helpers.scss');
-@import url('./../styles/buttons.scss');
-@import url('./../styles/auth.scss');
-@import url('./../styles/forms.scss');
-</style>

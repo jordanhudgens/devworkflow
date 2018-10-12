@@ -1,0 +1,5 @@
+.project-details-card {
+  @include card();
+  width: 400px;
+  background-color: white;
+}
