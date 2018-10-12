@@ -1,8 +1,16 @@
 <template>
   <div class="project-details-card">
-    <h2>
-      {{ selectedItemTitle }}
-    </h2>
+    <div class="card-header">
+      <div class="title">
+        {{ selectedItemTitle }}
+      </div>
+
+      <div class="close-icon">
+        <a @click.prevent="closeCard">
+          <i class="fas fa-times-circle"></i>
+        </a>
+      </div>
+    </div>
 
     <div class="card-details-description">
       {{ description }}
@@ -36,6 +44,12 @@ export default {
   props: {
     selectedItemTitle: String,
     project: Object
+  },
+
+  methods: {
+    closeCard() {
+      console.log("CLosing card...")
+    }
   }
 }
 </script>

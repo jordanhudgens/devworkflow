@@ -2,4 +2,27 @@
   @include card();
   width: 400px;
   background-color: white;
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-weight: 900;
+      color: $teal;
+      font-size: 1.5em;
+    }
+
+    .close-icon {
+      color: $teal;
+      transition: all 0.5s ease-in-out;
+      font-size: 2em;
+
+      &:hover {
+        color: $darkteal;
+        cursor: pointer;
+      }
+    }
+  }
 }
