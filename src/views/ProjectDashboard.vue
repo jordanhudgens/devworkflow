@@ -14,7 +14,7 @@
       </div>
 
       <div v-for="project in projects" :key="project.id">
-        <ProjectCard :project="project" @archiveProject="archiveProject" />
+        <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" />
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@ export default {
       this.activeModal = true;
     },
 
-    archiveProject(projectId) {
+    handleProjectStatusChange(projectId) {
       this.projects = this.projects.filter(project => {
         if (project.id != projectId) {
           return project;

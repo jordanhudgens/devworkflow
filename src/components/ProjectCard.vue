@@ -47,7 +47,7 @@
         <a class="archive-link" @click.prevent="toggleProjectStatus">
           <i class="fas fa-archive"></i>
           <span class="title">
-            Archive
+            {{ archiveActionText }}
           </span>
         </a>
       </div>
@@ -63,7 +63,7 @@ export default {
 
   data() {
     return {
-      showArchiveLink: false
+      showArchiveLink: false,
     }
   },
 
@@ -73,11 +73,18 @@ export default {
 
   computed: {
     archiveApiUrl: function() {
-      console.log("archiveApiURL", this.project);
       if (this.project.status === 'active') {
         return `https://devworkflow-api.herokuapp.com/archived_projects/${this.project.id}`
       } else {
         return `https://devworkflow-api.herokuapp.com/unarchive_projects/${this.project.id}`
+      }
+    },
+
+    archiveActionText: function() {
+      if (this.project.status === 'active') {
+        return 'Archive';
+      } else {
+        return 'Unarchive';
       }
     }
   },
@@ -103,7 +110,7 @@ export default {
         { withCredentials: true },
       )
         .then(response => {
-          this.$emit('archiveProject', this.project.id);
+          this.$emit('handleProjectStatusChange', this.project.id);
         })
         .catch(error => {
           console.log('errorrr', error);
