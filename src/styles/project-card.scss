@@ -17,84 +17,88 @@
   }
 }
 
-.project-card {
-  background-color: white;
-  color: #2a2828;
-  position: relative;
-  width: 300px;
-  padding: 20px 20px 42px 20px;
-  margin: 20px 20px 20px 0px;
-  border-radius: 8px;
+.project-card-and-detail-wrapper {
+  display: flex;
 
-  .metadata {
-    color: white;
-    position: absolute;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 180px;
-    background: rgb(103, 37, 221);
-    background: linear-gradient(
-      145deg,
-      rgba(103, 37, 221, 1) 0%,
-      rgba(32, 0, 97, 1) 100%
-    );
+  .project-card {
+    background-color: white;
+    color: #2a2828;
+    position: relative;
+    width: 300px;
+    padding: 20px 20px 42px 20px;
+    margin: 20px 20px 20px 0px;
+    border-radius: 8px;
 
-    .title {
-      padding: 20px;
-      font-weight: 600;
-      font-size: 1.1em;
-    }
+    .metadata {
+      color: white;
+      position: absolute;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 180px;
+      background: rgb(103, 37, 221);
+      background: linear-gradient(
+        145deg,
+        rgba(103, 37, 221, 1) 0%,
+        rgba(32, 0, 97, 1) 100%
+      );
 
-    .main-objective {
-      padding: 0px 20px 20px 20px;
-      font-size: 0.9em;
-    }
-  }
-  .status-action-links-wrapper {
-    height: 42px;
-    width: calc(100% - 20px);
-    position: absolute;
-    cursor: pointer;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-radius: 10px;
+      .title {
+        padding: 20px;
+        font-weight: 600;
+        font-size: 1.1em;
+      }
 
-    .delete-link {
-      @include status-link();
-      background-color: $red;
-      border-bottom-left-radius: 5px;
-
-      @include span-title();
-
-      &:hover {
-        background-color: $darkred;
+      .main-objective {
+        padding: 0px 20px 20px 20px;
+        font-size: 0.9em;
       }
     }
+    .status-action-links-wrapper {
+      height: 42px;
+      width: calc(100% - 20px);
+      position: absolute;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 10px;
 
-    .archive-link {
-      @include status-link();
-      background-color: $red;
-      border-bottom-right-radius: 5px;
+      .delete-link {
+        @include status-link();
+        background-color: $red;
+        border-bottom-left-radius: 5px;
 
-      @include span-title();
+        @include span-title();
 
-      &:hover {
-        background-color: $darkred;
+        &:hover {
+          background-color: $darkred;
+        }
       }
-    }
 
-    .unarchive-link {
-      @include status-link();
-      background-color: $teal;
-      border-bottom-right-radius: 5px;
+      .archive-link {
+        @include status-link();
+        background-color: $red;
+        border-bottom-right-radius: 5px;
 
-      @include span-title();
+        @include span-title();
 
-      &:hover {
-        background-color: $charcoal;
+        &:hover {
+          background-color: $darkred;
+        }
+      }
+
+      .unarchive-link {
+        @include status-link();
+        background-color: $teal;
+        border-bottom-right-radius: 5px;
+
+        @include span-title();
+
+        &:hover {
+          background-color: $charcoal;
+        }
       }
     }
   }

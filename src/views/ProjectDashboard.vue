@@ -14,7 +14,10 @@
       </div>
 
       <div v-for="project in projects" :key="project.id">
-        <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" />
+        <div class="project-card-and-detail-wrapper">
+          <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" />
+          <ProjectCardDetails v-if="showCardDetails" :project="project" />
+        </div>
       </div>
     </div>
   </div>
@@ -25,6 +28,7 @@ import axios from 'axios';
 import NewProject from '@/components/NewProject';
 import ProjectDashboardNav from '@/components/ProjectDashboardNav';
 import ProjectCard from '@/components/ProjectCard';
+import ProjectCardDetails from '@/components/ProjectCardDetails';
 
 export default {
   name: 'ProjectDashboard',
@@ -37,14 +41,16 @@ export default {
     return {
       statusLinkText: 'Archived',
       projects: [],
-      activeModal: false
+      activeModal: false,
+      showCardDetails: false
     }
   },
 
   components: {
     NewProject,
     ProjectDashboardNav,
-    ProjectCard
+    ProjectCard,
+    ProjectCardDetails
   },
 
   methods: {

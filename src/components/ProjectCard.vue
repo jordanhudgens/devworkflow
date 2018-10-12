@@ -67,6 +67,10 @@ export default {
     }
   },
 
+  mounted() {
+    console.log("Project obj", this.project);
+  },
+
   props: {
     project: Object
   },
