@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card expanded-card">
     <h2>
       {{ selectedItemTitle }}
     </h2>
@@ -21,9 +21,15 @@ export default {
 
   computed: {
     description: function() {
-      return this.project.project_line_items.find(pli => {
+      const filteredDescription = this.project.project_line_items.find(pli => {
         return pli.title === this.selectedItemTitle
-      }).description
+      });
+
+      if (filteredDescription) {
+        return filteredDescription.description;
+      } else {
+        return "";
+      }
     }
   },
 
@@ -33,7 +39,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
