@@ -11,8 +11,6 @@
     </div>
 
     <div class="line-items">
-      <pre>Status: {{ project }}</pre>
-
       <div class="line-item">
         <span class="completed-circle"></span>
         <span class="title">
@@ -75,6 +73,7 @@ export default {
 
   computed: {
     archiveApiUrl: function() {
+      console.log("archiveApiURL", this.project);
       if (this.project.status === 'active') {
         return `https://devworkflow-api.herokuapp.com/archived_projects/${this.project.id}`
       } else {
@@ -104,7 +103,7 @@ export default {
         { withCredentials: true },
       )
         .then(response => {
-          this.$emit('archiveProject', projectId);
+          this.$emit('archiveProject', this.project.id);
         })
         .catch(error => {
           console.log('errorrr', error);
