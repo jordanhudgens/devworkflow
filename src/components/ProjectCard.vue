@@ -11,19 +11,23 @@
     </div>
 
     <div class="line-items">
-      <div class="line-item">
-        <span class="completed-circle"></span>
-        <span class="title">
-          Wireframes
-        </span>
-      </div>
+      <a class="small-link" @click.prevent="showDetails('Wireframes')">
+        <div class="line-item">
+          <span class="completed-circle"></span>
+          <span class="title">
+            Wireframes
+          </span>
+        </div>
+      </a>
 
-      <div class="line-item">
-        <span class="incompleted-circle"></span>
-        <span class="title">
-          Sitemap
-        </span>
-      </div>
+      <a class="small-link" @click.prevent="showDetails('Sitemap')">
+        <div class="line-item">
+          <span class="incompleted-circle"></span>
+          <span class="title">
+            Sitemap
+          </span>
+        </div>
+      </a>
 
       <div class="line-item">User Stories</div>
       <div class="line-item">UML Diagrams</div>
@@ -94,6 +98,10 @@ export default {
   },
 
   methods: {
+    showDetails(title) {
+      this.$emit("showCardDetails", { title: title, projectId: this.project.id });
+    },
+
     toggleArchiveLink() {
       if (this.showArchiveLink) {
         this.showArchiveLink = false;
