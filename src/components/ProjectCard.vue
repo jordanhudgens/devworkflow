@@ -11,6 +11,7 @@
     </div>
 
     <div class="line-items">
+      <pre>Status: {{ project }}</pre>
 
       <div class="line-item">
         <span class="completed-circle"></span>
@@ -37,9 +38,21 @@
     </div>
 
     <transition name="fade">
-      <a v-if="showArchiveLink" class="archive-link" @click.prevent="archiveProject(project.id)">
-        Archive Project
-      </a>
+      <div v-if="showArchiveLink" class="status-action-links-wrapper">
+        <a class="delete-link" @click.prevent="deleteProject">
+          <i class="fas fa-times"></i>
+          <span class="title">
+            Delete
+          </span>
+        </a>
+
+        <a class="archive-link" @click.prevent="toggleProjectStatus">
+          <i class="fas fa-archive"></i>
+          <span class="title">
+            Archive
+          </span>
+        </a>
+      </div>
     </transition>
   </div>
 </template>
@@ -60,6 +73,16 @@ export default {
     project: Object
   },
 
+  computed: {
+    archiveApiUrl: function() {
+      if (this.project.status === 'active') {
+        return `https://devworkflow-api.herokuapp.com/archived_projects/${this.project.id}`
+      } else {
+        return `https://devworkflow-api.herokuapp.com/unarchive_projects/${this.project.id}`
+      }
+    }
+  },
+
   methods: {
     toggleArchiveLink() {
       if (this.showArchiveLink) {
@@ -69,10 +92,14 @@ export default {
       }
     },
 
-    archiveProject(projectId) {
+    deleteProject() {
+      console.log('Deleting project...')
+    },
+
+    toggleProjectStatus() {
       axios
         .patch(
-        `https://devworkflow-api.herokuapp.com/archived_projects/${projectId}`,
+        this.archiveApiUrl,
         {},
         { withCredentials: true },
       )

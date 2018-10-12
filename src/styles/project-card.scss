@@ -1,5 +1,22 @@
 @import "./variables.scss";
 
+@mixin status-link {
+  margin-left: -20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 700;
+  transition: all 0.5s ease-in-out;
+}
+
+@mixin span-title {
+  .title {
+    margin-left: 5px;
+  }
+}
+
 .project-card {
   background-color: white;
   color: #2a2828;
@@ -36,26 +53,49 @@
       font-size: 0.9em;
     }
   }
-
-  .archive-link {
+  .status-action-links-wrapper {
     height: 42px;
-    width: 100%;
+    width: calc(100% - 20px);
     position: absolute;
-    background-color: $red;
-    margin-left: -20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-weight: 700;
-    transition: all 0.5s ease-in-out;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
     cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 10px;
 
-    &:hover {
-      background-color: $darkred;
+    .delete-link {
+      @include status-link();
+      background-color: $red;
+      border-bottom-left-radius: 5px;
+
+      @include span-title();
+
+      &:hover {
+        background-color: $darkred;
+      }
+    }
+
+    .archive-link {
+      @include status-link();
+      background-color: $red;
+      border-bottom-right-radius: 5px;
+
+      @include span-title();
+
+      &:hover {
+        background-color: $darkred;
+      }
+    }
+
+    .unarchive-link {
+      @include status-link();
+      background-color: $teal;
+      border-bottom-right-radius: 5px;
+
+      @include span-title();
+
+      &:hover {
+        background-color: $charcoal;
+      }
     }
   }
 }
