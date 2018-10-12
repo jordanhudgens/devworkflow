@@ -112,11 +112,11 @@ export default {
       }).then(result => {
         if (result.value) {
           axios
-            .delete(`https://devworkflow-api.herokuapp.com/projects/${plan.slug}`, {},
+            .delete(`https://devworkflow-api.herokuapp.com/projects/${this.project.id}`,
             { withCredentials: true }
             )
             .then(response => {
-              console.log("Deleting response", response);
+              this.$emit('handleProjectStatusChange', this.project.id);
               return response.data;
             })
             .catch(error => {
