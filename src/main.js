@@ -1,10 +1,14 @@
 import Vue from "vue";
+
+import VueSweetalert2 from "vue-sweetalert2";
+import VModal from "vue-js-modal";
+
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import VModal from "vue-js-modal";
 
 Vue.use(VModal);
+Vue.use(VueSweetalert2);
 
 Vue.config.productionTip = false;
 

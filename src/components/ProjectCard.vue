@@ -99,7 +99,34 @@ export default {
     },
 
     deleteProject() {
-      console.log('Deleting project...')
+      this.$swal({
+        title: 'Are you sure you want to delete this project?',
+        text:
+        "This will permanently delete the project and you won't be able to get it back",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes Delete it!',
+        cancelButtonText: 'No, Keep it!',
+        showCloseButton: true,
+        showLoaderOnConfirm: true,
+      }).then(result => {
+        if (result.value) {
+          axios
+            .delete(`https://devworkflow-api.herokuapp.com/projects/${plan.slug}`, {},
+            { withCredentials: true }
+            )
+            .then(response => {
+              console.log("Deleting response", response);
+              return response.data;
+            })
+            .catch(error => {
+              console.log(error);
+            });
+          this.$swal('Deleted', 'You successfully deleted the project', 'success');
+        } else {
+          this.$swal('Cancelled', 'Your project is still intact!', 'info');
+        }
+      });
     },
 
     toggleProjectStatus() {
