@@ -16,7 +16,7 @@
       <div v-for="project in projects" :key="project.id">
         <div class="project-card-and-detail-wrapper">
           <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" @showCardDetails="handleCardLineItemClick" />
-          <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" :selectedItemTitle="selectedLineItem.title" />
+          <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" :selectedItemTitle="selectedLineItem.title" @closeCard="closeCard" />
         </div>
       </div>
     </div>
@@ -58,10 +58,13 @@ export default {
 
   methods: {
     handleCardLineItemClick(res) {
-      console.log("ShowCardDetails", res);
       this.selectedLineItem.title = res.title;
       this.selectedLineItem.projectId = res.projectId;
-      console.log("selectedLineItem obj", this.selectedLineItem);
+    },
+
+    closeCard() {
+      this.selectedLineItem.title = null;
+      this.selectedLineItem.projectId = null;
     },
 
     shouldExpandCard(projectId) {

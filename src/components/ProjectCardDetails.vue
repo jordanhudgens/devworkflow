@@ -48,7 +48,7 @@ export default {
 
   methods: {
     closeCard() {
-      console.log("CLosing card...")
+      this.$emit("closeCard");
     }
   }
 }
