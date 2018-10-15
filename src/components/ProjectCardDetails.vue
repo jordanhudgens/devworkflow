@@ -94,7 +94,7 @@ export default {
         { withCredentials: true },
       )
         .then(response => {
-          console.log("Response for updating", response);
+          this.$emit('updateProjectLineItem', response.data);
           this.closeCard();
         })
         .catch(error => {

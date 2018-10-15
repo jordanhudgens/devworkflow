@@ -16,7 +16,7 @@
       <div v-for="project in projects" :key="project.id">
         <div class="project-card-and-detail-wrapper">
           <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" @showCardDetails="handleCardLineItemClick" />
-          <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" :selectedItemTitle="selectedLineItem.title" @closeCard="closeCard" />
+          <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" :selectedItemTitle="selectedLineItem.title" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
         </div>
       </div>
     </div>
@@ -57,6 +57,17 @@ export default {
   },
 
   methods: {
+    updateProjectLineItem(res) {
+      const projectId = res.project_line_item.project.id;
+
+      for (let project of this.projects) {
+        if (project.id === projectId) {
+          project.project_line_items = project.project_line_items.filter(pli => pli.id !== res.project_line_item.id);
+          project.project_line_items.push(res.project_line_item)
+        }
+      };
+    },
+
     handleCardLineItemClick(res) {
       this.selectedLineItem.title = res.title;
       this.selectedLineItem.projectId = res.projectId;
