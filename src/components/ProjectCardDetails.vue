@@ -21,7 +21,7 @@
     </div>
 
     <div class="card-details-description">
-      {{ description }}
+      {{ selectedProjectLineItem.description }}
     </div>
   </div>
 </template>
@@ -32,22 +32,17 @@ export default {
 
   data() {
     return {
-      updateLineItemUrl: "https://devworkflow-api.herokuapp.com/project_line_items/"
+      updateLineItemUrl: "https://devworkflow-api.herokuapp.com/project_line_items/",
+      selectedProjectLineItem: null
     }
   },
 
-  computed: {
-    description: function() {
-      const filteredDescription = this.project.project_line_items.find(pli => {
-        return pli.title === this.selectedItemTitle
-      });
+  beforeMount() {
+    this.setSelectedItem();
+  },
 
-      if (filteredDescription) {
-        return filteredDescription.description;
-      } else {
-        return "";
-      }
-    }
+  beforeUpdate() {
+    this.setSelectedItem();
   },
 
   props: {
@@ -56,11 +51,18 @@ export default {
   },
 
   methods: {
+    setSelectedItem() {
+      this.selectedProjectLineItem = this.project.project_line_items.find(pli => {
+        return pli.title === this.selectedItemTitle
+      });
+    },
+
     closeCard() {
       this.$emit("closeCard");
     },
 
     updateLineItem() {
+      console.log("Updating...", this.selectedProjectLineItem.id)
       // axios
       //   .patch(
       //   this.updateLineItemUrl,
