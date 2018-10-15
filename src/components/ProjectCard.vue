@@ -11,32 +11,14 @@
     </div>
 
     <div class="line-items">
-      <a class="small-link" @click.prevent="showDetails('Wireframes')">
+      <a v-for="(title, idx) in lineItemTitles" :key="idx" class="small-link" @click.prevent="showDetails(title)">
         <div class="line-item">
-          <span :class="lineItemStatusIcon('Wireframes')"></span>
+          <span :class="lineItemStatusIcon(title)"></span>
           <span class="title">
-            Wireframes
+            {{ title }}
           </span>
         </div>
       </a>
-
-      <a class="small-link" @click.prevent="showDetails('Sitemap')">
-        <div class="line-item">
-          <span class="incompleted-circle"></span>
-          <span class="title">
-            Sitemap
-          </span>
-        </div>
-      </a>
-
-      <div class="line-item">User Stories</div>
-      <div class="line-item">UML Diagrams</div>
-      <div class="line-item">Hi-Res Designs</div>
-      <div class="line-item">Logo/Images</div>
-      <div class="line-item">Frontend Implementation</div>
-      <div class="line-item">Backend API</div>
-      <div class="line-item">Automated Tests</div>
-      <div class="line-item">Deployment</div>
     </div>
 
     <transition name="fade">
@@ -68,6 +50,18 @@ export default {
   data() {
     return {
       showArchiveLink: false,
+      lineItemTitles: [
+        "Wireframes",
+        "Sitemap",
+        "User Stories",
+        "UML Diagrams",
+        "Hi-Res Designs",
+        "Logo/Images",
+        "Frontend Implementation",
+        "Backend API",
+        "Automated Tests",
+        "Deployment"
+      ]
     }
   },
 
@@ -103,7 +97,7 @@ export default {
 
       if (projectLineItems.length > 0) {
         for (let lineItem of projectLineItems) {
-          if (lineItem.status === 'completed') {
+          if ((lineItem.title === lineItemTitle) && (lineItem.status === 'completed')) {
             return 'completed-circle'
           }
         }
