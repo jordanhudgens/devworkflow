@@ -97,7 +97,7 @@ export default {
 
       if (projectLineItems.length > 0) {
         for (let lineItem of projectLineItems) {
-          if ((lineItem.title === lineItemTitle) && (lineItem.status === 'completed')) {
+          if ((lineItem.title === lineItemTitle) && (lineItem.completed === true)) {
             return 'completed-circle'
           }
         }

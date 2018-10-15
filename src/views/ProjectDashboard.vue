@@ -16,7 +16,9 @@
       <div v-for="project in projects" :key="project.id">
         <div class="project-card-and-detail-wrapper">
           <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" @showCardDetails="handleCardLineItemClick" />
-          <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" :selectedItemTitle="selectedLineItem.title" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
+          <transition name="fade">
+            <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" :selectedItemTitle="selectedLineItem.title" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
+          </transition>
         </div>
       </div>
     </div>
