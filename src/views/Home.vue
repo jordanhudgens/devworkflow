@@ -25,7 +25,8 @@ export default {
   name: 'home',
 
   components: {
-    Auth
+    Auth,
+    Footer
   },
 
   methods: {

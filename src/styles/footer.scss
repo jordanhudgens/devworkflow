@@ -1,0 +1,12 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+
+  .content {
+    font-weight: 900;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+  }
+}

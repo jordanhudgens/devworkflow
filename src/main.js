@@ -7,7 +7,9 @@ import PrettyCheckbox from "pretty-checkbox-vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import VueSVGIcon from "vue-svgicon";
 
+Vue.use(VueSVGIcon);
 Vue.use(PrettyCheckbox);
 Vue.use(VModal);
 Vue.use(VueSweetalert2);
