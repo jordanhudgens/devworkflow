@@ -20,13 +20,15 @@
       </div>
     </div>
 
-    <div class="card-details-description">
+    <div v-if="selectedProjectLineItem" class="card-details-description">
       {{ selectedProjectLineItem.description }}
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'ProjectCardDetails',
 
@@ -63,23 +65,24 @@ export default {
 
     updateLineItem() {
       console.log("Updating...", this.selectedProjectLineItem.id)
-      // axios
-      //   .patch(
-      //   this.updateLineItemUrl,
-      //   {
-      //     project_line_item: {
-      //       description: "Updated content...",
-      //       status: 'not_completed'
-      //     }
-      //   },
-      //   { withCredentials: true },
-      // )
-      //   .then(response => {
-      //     console.log("Response for updating", response);
-      //   })
-      //   .catch(error => {
-      //     console.log('errorrr', error);
-      //   });
+      axios
+        .patch(
+        this.updateLineItemUrl + this.selectedProjectLineItem.id,
+        {
+          project_line_item: {
+            description: "Updated content...",
+            status: 'not_completed'
+          }
+        },
+        { withCredentials: true },
+      )
+        .then(response => {
+          console.log("Response for updating", response);
+          this.closeCard();
+        })
+        .catch(error => {
+          console.log('errorrr', error);
+        });
     }
   }
 }
