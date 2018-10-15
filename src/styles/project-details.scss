@@ -14,7 +14,10 @@
       font-size: 1.5em;
     }
 
-    .close-icon {
+    .action-icons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 15px;
       color: $teal;
       transition: all 0.5s ease-in-out;
       font-size: 2em;
@@ -22,6 +25,15 @@
       &:hover {
         color: $darkteal;
         cursor: pointer;
+      }
+
+      .close-icon {
+        color: $red;
+        transition: all 0.5s ease-in-out;
+
+        &:hover {
+          color: $darkred;
+        }
       }
     }
   }

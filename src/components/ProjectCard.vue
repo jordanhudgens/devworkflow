@@ -162,7 +162,8 @@ export default {
         .catch(error => {
           console.log('errorrr', error);
         });
-    }
+    },
+
   }
 }
 </script>

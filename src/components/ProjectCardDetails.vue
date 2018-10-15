@@ -5,10 +5,18 @@
         {{ selectedItemTitle }}
       </div>
 
-      <div class="close-icon">
-        <a @click.prevent="closeCard">
-          <i class="fas fa-times-circle"></i>
-        </a>
+      <div class="action-icons">
+        <div class="update-icon">
+          <a @click.prevent="updateLineItem">
+            <i class="fas fa-save"></i>
+          </a>
+        </div>
+
+        <div class="close-icon">
+          <a @click.prevent="closeCard">
+            <i class="fas fa-times-circle"></i>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -24,6 +32,7 @@ export default {
 
   data() {
     return {
+      updateLineItemUrl: "https://devworkflow-api.herokuapp.com/project_line_items/"
     }
   },
 
@@ -49,6 +58,26 @@ export default {
   methods: {
     closeCard() {
       this.$emit("closeCard");
+    },
+
+    updateLineItem() {
+      // axios
+      //   .patch(
+      //   this.updateLineItemUrl,
+      //   {
+      //     project_line_item: {
+      //       description: "Updated content...",
+      //       status: 'not_completed'
+      //     }
+      //   },
+      //   { withCredentials: true },
+      // )
+      //   .then(response => {
+      //     console.log("Response for updating", response);
+      //   })
+      //   .catch(error => {
+      //     console.log('errorrr', error);
+      //   });
     }
   }
 }
