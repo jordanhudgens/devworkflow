@@ -12,11 +12,14 @@
       <Auth formType="login" @login="handleSuccessfulAuth" />
       <Auth formType="register" @register="handleSuccessfulAuth" />
     </div>
+
+    <Footer />
   </div>
 </template>
 
 <script>
 import Auth from '@/components/Auth'
+import Footer from '@/components/Footer'
 
 export default {
   name: 'home',
