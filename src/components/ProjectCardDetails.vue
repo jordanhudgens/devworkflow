@@ -33,6 +33,15 @@
         <div v-else>
           Description goes here
         </div>
+
+      </div>
+
+      <div>
+        {{ completed }}
+      </div>
+
+      <div class="status">
+        <p-check class="p-switch p-fill" color="success" v-model="completed">Completed?</p-check>
       </div>
     </div>
   </div>
@@ -48,7 +57,8 @@ export default {
     return {
       updateLineItemUrl: "https://devworkflow-api.herokuapp.com/project_line_items/",
       loading: true,
-      selectedProjectLineItem: {}
+      selectedProjectLineItem: {},
+      completed: false,
     }
   },
 
