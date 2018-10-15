@@ -13,7 +13,7 @@
     <div class="line-items">
       <a class="small-link" @click.prevent="showDetails('Wireframes')">
         <div class="line-item">
-          <span class="completed-circle"></span>
+          <span :class="lineItemStatusIcon('Wireframes')"></span>
           <span class="title">
             Wireframes
           </span>
@@ -98,6 +98,20 @@ export default {
   },
 
   methods: {
+    lineItemStatusIcon(lineItemTitle) {
+      const projectLineItems = this.project.project_line_items;
+
+      if (projectLineItems.length > 0) {
+        for (let lineItem of projectLineItems) {
+          if (lineItem.status === 'completed') {
+            return 'completed-circle'
+          }
+        }
+      }
+
+      return 'incompleted-circle';
+    },
+
     showDetails(title) {
       this.$emit("showCardDetails", { title: title, projectId: this.project.id });
     },
