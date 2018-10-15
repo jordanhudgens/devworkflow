@@ -1,5 +1,9 @@
 <template>
   <div class="fixed-nav-container">
+    <div class="header-logo">
+      Dev Workflow
+    </div>
+
     <div class="project-nav">
       <div class="left">
         <a class="link" @click.prevent="toggleStatus">

@@ -1,6 +1,6 @@
 .project-cards-wrapper {
   display: inline-flex;
-  margin-top: 21px;
+  margin-top: 80px;
 
   .new-project {
     height: 728px;
@@ -46,6 +46,11 @@
   position: fixed;
   width: 100vw;
   padding-right: 100px;
+
+  .header-logo {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
 
   .project-nav {
     display: flex;
