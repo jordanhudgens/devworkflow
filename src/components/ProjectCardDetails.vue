@@ -1,44 +1,46 @@
 <template>
   <div class="project-details-card">
-    <div class="card-header">
-      <div class="title">
-        {{ selectedItemTitle }}
+    <div class="content">
+      <div class="card-header">
+        <div class="title">
+          {{ selectedItemTitle }}
+        </div>
+
+        <div class="action-icons">
+          <div class="update-icon">
+            <a @click.prevent="updateLineItem">
+              <i class="fas fa-save"></i>
+            </a>
+          </div>
+
+          <div class="close-icon">
+            <a @click.prevent="closeCard">
+              <i class="fas fa-times-circle"></i>
+            </a>
+          </div>
+        </div>
       </div>
 
-      <div class="action-icons">
-        <div class="update-icon">
-          <a @click.prevent="updateLineItem">
-            <i class="fas fa-save"></i>
-          </a>
+      <div v-if="loading">
+        <i class="fas fa-spinner"></i>
+      </div>
+
+      <div v-else-if="selectedProjectLineItem">
+        <div class="card-details-description" @click.prevent="editDescription">
+          <div v-if="selectedProjectLineItem.description">
+            {{ selectedProjectLineItem.description }}
+          </div>
+
+          <div v-else>
+            Description goes here
+          </div>
         </div>
 
-        <div class="close-icon">
-          <a @click.prevent="closeCard">
-            <i class="fas fa-times-circle"></i>
-          </a>
-        </div>
       </div>
     </div>
 
-    <div v-if="loading">
-      <i class="fas fa-spinner"></i>
-    </div>
-
-    <div v-else-if="selectedProjectLineItem">
-      <div class="card-details-description" @click.prevent="editDescription">
-        <div v-if="selectedProjectLineItem.description">
-          {{ selectedProjectLineItem.description }}
-        </div>
-
-        <div v-else>
-          Description goes here
-        </div>
-
-      </div>
-
-      <div class="status">
-        <p-check class="p-switch p-fill" color="success" v-model="selectedProjectLineItem.completed">Completed?</p-check>
-      </div>
+    <div class="status">
+      <p-check class="p-switch p-fill" color="success" v-model="selectedProjectLineItem.completed">Completed?</p-check>
     </div>
   </div>
 </template>

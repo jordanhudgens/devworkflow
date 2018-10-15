@@ -2,6 +2,9 @@
   @include card();
   width: 400px;
   background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
   .card-header {
     display: flex;
@@ -36,5 +39,11 @@
         }
       }
     }
+  }
+
+  .status {
+    align-self: flex-end;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 900;
   }
 }
