@@ -20,8 +20,20 @@
       </div>
     </div>
 
-    <div v-if="selectedProjectLineItem" class="card-details-description">
-      {{ selectedProjectLineItem.description }}
+    <div v-if="loading">
+      <i class="fas fa-spinner"></i>
+    </div>
+
+    <div v-else-if="selectedProjectLineItem">
+      <div class="card-details-description" @click.prevent="editDescription">
+        <div v-if="selectedProjectLineItem.description">
+          {{ selectedProjectLineItem.description }}
+        </div>
+
+        <div v-else>
+          Description goes here
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +47,8 @@ export default {
   data() {
     return {
       updateLineItemUrl: "https://devworkflow-api.herokuapp.com/project_line_items/",
-      selectedProjectLineItem: null
+      loading: true,
+      selectedProjectLineItem: {}
     }
   },
 
@@ -53,10 +66,15 @@ export default {
   },
 
   methods: {
+    editDescription() {
+      console.log("Editttinggg")
+    },
+
     setSelectedItem() {
       this.selectedProjectLineItem = this.project.project_line_items.find(pli => {
         return pli.title === this.selectedItemTitle
       });
+      this.loading = false;
     },
 
     closeCard() {
@@ -64,7 +82,6 @@ export default {
     },
 
     updateLineItem() {
-      console.log("Updating...", this.selectedProjectLineItem.id)
       axios
         .patch(
         this.updateLineItemUrl + this.selectedProjectLineItem.id,
