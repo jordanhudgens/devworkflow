@@ -14,6 +14,21 @@
     font-size: 1rem;
   }
 
+  .cancel {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: $red;
+    text-align: right;
+    margin-top: -14px;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      color: $darkred;
+      cursor: pointer;
+    }
+  }
+
   .form-buttons-wrapper {
     display: flex;
     justify-content: center;

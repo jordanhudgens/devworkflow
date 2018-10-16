@@ -10,6 +10,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 
     .title {
       font-weight: 900;
@@ -38,6 +39,12 @@
           color: $darkred;
         }
       }
+    }
+  }
+
+  .card-details-description {
+    &:hover {
+      cursor: pointer;
     }
   }
 

@@ -26,7 +26,7 @@
       </div>
 
       <div v-else-if="selectedProjectLineItem">
-        <div class="card-details-description" @click.prevent="editDescription">
+        <div v-if="!descriptionEditMode" class="card-details-description" @click.prevent="editDescription">
           <div v-if="selectedProjectLineItem.description">
             {{ selectedProjectLineItem.description }}
           </div>
@@ -34,6 +34,13 @@
           <div v-else>
             Description goes here
           </div>
+        </div>
+
+        <div v-else class="form-wrapper">
+          <input v-model="selectedProjectLineItem.description" placeholder="Description goes here" class="full-width-element">
+          <a @click.prevent="descriptionEditMode = false" class="cancel">
+            <i class="fas fa-times"></i> Cancel
+          </a>
         </div>
 
       </div>
@@ -56,6 +63,7 @@ export default {
       updateLineItemUrl: "https://devworkflow-api.herokuapp.com/project_line_items/",
       loading: true,
       selectedProjectLineItem: {},
+      descriptionEditMode: false
     }
   },
 
@@ -74,7 +82,7 @@ export default {
 
   methods: {
     editDescription() {
-      console.log("Editttinggg")
+      this.descriptionEditMode = true;
     },
 
     setSelectedItem() {
@@ -85,6 +93,7 @@ export default {
     },
 
     closeCard() {
+      this.selectedProjectLineItem = {}
       this.$emit("closeCard");
     },
 
@@ -94,7 +103,7 @@ export default {
         this.updateLineItemUrl + this.selectedProjectLineItem.id,
         {
           project_line_item: {
-            description: "Updated content...",
+            description: this.selectedProjectLineItem.description,
             completed: this.selectedProjectLineItem.completed
           }
         },
