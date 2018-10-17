@@ -69,6 +69,7 @@ export default {
     },
 
     closeModal() {
+      this.newProject = {};
       this.$modal.hide('new-project');
     },
 
