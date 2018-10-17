@@ -26,12 +26,13 @@
       </div>
 
       <div v-else-if="selectedProjectLineItem">
+        <!-- Start of description edit process  -->
         <div v-if="!descriptionEditMode" class="card-details-description" @click.prevent="editDescription">
           <div v-if="selectedProjectLineItem.description">
             {{ selectedProjectLineItem.description }}
           </div>
 
-          <div v-else>
+          <div v-else class="placeholder-text">
             Description goes here
           </div>
         </div>
@@ -41,6 +42,22 @@
           <a @click.prevent="descriptionEditMode = false" class="cancel">
             <i class="fas fa-times"></i> Cancel
           </a>
+        </div>
+        <!-- End of description edit process  -->
+
+        <div class="spacer20"></div>
+
+        <div class="list-wrapper">
+          <h3 class="teal">
+            <i class="fas fa-clipboard-list"></i> Checklist
+          </h3>
+
+          <div v-if="listItems.length === 0" class="placeholder-text">
+            No checklist items added yet
+          </div>
+          <div class="list-item">
+
+          </div>
         </div>
 
       </div>
@@ -63,7 +80,8 @@ export default {
       updateLineItemUrl: "https://devworkflow-api.herokuapp.com/project_line_items/",
       loading: true,
       selectedProjectLineItem: {},
-      descriptionEditMode: false
+      descriptionEditMode: false,
+      listItems: []
     }
   },
 

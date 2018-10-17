@@ -7,8 +7,16 @@
   background-color: $teal;
 }
 
+.spacer20 {
+  height: 20px;
+}
+
 .spacer30 {
   height: 30px;
+}
+
+.spacer40 {
+  height: 40px;
 }
 
 .spacer50 {
@@ -35,4 +43,14 @@
 .incompleted-circle {
   @include circle;
   background-color: $red;
+}
+
+.placeholder-text {
+  color: $lightgrey;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.teal {
+  color: $teal;
 }
