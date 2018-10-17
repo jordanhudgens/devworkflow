@@ -23,6 +23,7 @@
   .project-card {
     @include card();
     width: 300px;
+    margin-top: 50px;
 
     .metadata {
       @include card-puple-header-bg();

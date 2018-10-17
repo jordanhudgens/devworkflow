@@ -1,7 +1,20 @@
 <template>
   <div class="fixed-nav-container">
     <div class="header-logo">
-      Dev Workflow
+      <div class="title">
+        Dev Workflow
+      </div>
+
+      <div class="bottega-text-wrapper">
+        <div class="content">
+          A proud product of
+        </div>
+
+        <a href="https://bottega.tech" target="_blank">
+          <svgicon icon="white-bottega-logo" width="120" height="80" style="stroke: none;"></svgicon>
+        </a>
+      </div>
+
     </div>
 
     <div class="project-nav">
@@ -23,6 +36,7 @@
 
 <script>
 import axios from 'axios';
+import '@/compiled-icons/white-bottega-logo';
 
 export default {
   name: 'ProjectDashboardNav',

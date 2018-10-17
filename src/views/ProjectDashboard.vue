@@ -33,7 +33,6 @@ import NewProject from '@/components/NewProject';
 import ProjectDashboardNav from '@/components/ProjectDashboardNav';
 import ProjectCard from '@/components/ProjectCard';
 import ProjectCardDetails from '@/components/ProjectCardDetails';
-import Footer from '@/components/Footer';
 
 export default {
   name: 'ProjectDashboard',
@@ -59,7 +58,6 @@ export default {
     ProjectDashboardNav,
     ProjectCard,
     ProjectCardDetails,
-    Footer
   },
 
   methods: {

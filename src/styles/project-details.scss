@@ -1,5 +1,6 @@
 .project-details-card {
   @include card();
+  margin-top: 50px;
   width: 400px;
   background-color: white;
   display: flex;

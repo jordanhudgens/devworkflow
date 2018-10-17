@@ -5,7 +5,7 @@
   .new-project {
     height: 728px;
     width: 300px;
-    margin-top: 20px;
+    margin-top: 50px;
     margin-right: 20px;
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.3);
@@ -48,8 +48,15 @@
   padding-right: 100px;
 
   .header-logo {
-    font-size: 2em;
-    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 200px;
+
+    .title {
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
   }
 
   .project-nav {
