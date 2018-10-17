@@ -52,11 +52,13 @@
             <i class="fas fa-clipboard-list"></i> Checklist
           </h3>
 
-          <div v-if="listItems.length === 0" class="placeholder-text">
-            No checklist items added yet
+          <div v-if="listItems.length > 0">
+            <div v-for="listItem in listItems" :key="listItem.id" class="list-item">
+              {{ listItem.title }}
+            </div>
           </div>
-          <div class="list-item">
-
+          <div v-else class="placeholder-text">
+            No checklist items added yet
           </div>
         </div>
 
@@ -93,6 +95,12 @@ export default {
     this.setSelectedItem();
   },
 
+  watch: {
+    selectedProjectLineItem: function(oldVal, newVal) {
+      this.getListItems(oldVal.id);
+    }
+  },
+
   props: {
     selectedItemTitle: String,
     project: Object
@@ -113,6 +121,19 @@ export default {
     closeCard() {
       this.selectedProjectLineItem = {}
       this.$emit("closeCard");
+    },
+
+    getListItems(projectLineItemId) {
+      this.listItems = [];
+
+      axios
+        .get(`https://devworkflow-api.herokuapp.com/project_line_items/${projectLineItemId}`, { withCredentials: true })
+        .then(response => {
+          this.listItems.push(...response.data.project_line_item.check_list_items);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
 
     updateLineItem() {
