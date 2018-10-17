@@ -45,12 +45,21 @@
         </div>
         <!-- End of description edit process  -->
 
+        <!-- Start of check list  -->
         <div class="spacer20"></div>
 
         <div class="list-wrapper">
-          <h3 class="teal">
-            <i class="fas fa-clipboard-list"></i> Checklist
-          </h3>
+          <div class="header">
+            <h3 class="teal">
+              <i class="fas fa-clipboard-list"></i> Checklist
+            </h3>
+
+            <a class="link" @click.prevent="addListItem">
+              <h3 class="teal">
+                <i class="fas fa-plus-circle"></i>
+              </h3>
+            </a>
+          </div>
 
           <div v-if="listItems.length > 0">
             <div v-for="listItem in listItems" :key="listItem.id" class="list-item">
@@ -60,7 +69,16 @@
           <div v-else class="placeholder-text">
             No checklist items added yet
           </div>
+
+          <div v-if="listItemForms.length > 0">
+            <div v-for="(listItemForm, idx) in listItemForms" :key="idx" class="form-element">
+              <input type="text" placeholder="Content here">
+              <!-- TODO <ListItemForm :formElements="formElements" :id="idx" @update="updateListItemValues" />  -->
+            </div>
+          </div>
+
         </div>
+        <!-- end of check list  -->
 
       </div>
     </div>
@@ -83,7 +101,8 @@ export default {
       loading: true,
       selectedProjectLineItem: {},
       descriptionEditMode: false,
-      listItems: []
+      listItems: [],
+      listItemForms: []
     }
   },
 
@@ -107,6 +126,11 @@ export default {
   },
 
   methods: {
+    addListItem() {
+      console.log("Adding list item")
+      this.listItemForms.push({ title: 'asdfsdf' })
+    },
+
     editDescription() {
       this.descriptionEditMode = true;
     },
