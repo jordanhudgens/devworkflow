@@ -5,6 +5,18 @@
         {{ project.title }}
       </div>
 
+      <p>There are currently {{ countLinks }} links</p>
+
+      <button v-on:click="removeLinks(index)" class="rm">Remove</button>
+
+      <hr>
+
+      <button v-on:click="removeAllLinks">Remove all links</button>
+
+      <form @submit.prevent="addLink">
+        <input class="link-input" type="text" placeholder="Add a Link" v-model="newLink" />
+      </form>
+
       <div class="main-objective">
         {{ project.main_objective }}
       </div>
@@ -42,6 +54,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import axios from 'axios';
 
 export default {
@@ -74,6 +87,10 @@ export default {
   },
 
   computed: {
+    ...mapGetters([
+      'countLinks'
+    ]),
+
     archiveApiUrl: function() {
       if (this.project.status === 'active') {
         return `https://devworkflow-api.herokuapp.com/archived_projects/${this.project.id}`
@@ -92,6 +109,29 @@ export default {
   },
 
   methods: {
+    ...mapMutations([
+      'ADD_LINK'
+    ]),
+    addLink: function() {
+      this.ADD_LINK(this.newLink)
+      this.newLink = ''
+    },
+
+    ...mapActions([                  // Add this
+      'removeLink'
+    ]),
+    removeLinks: function(link) {    // Add this
+      this.removeLink(link)
+    },
+
+    ...mapMutations(['REMOVE_ALL']),
+    ...mapActions(['removeAll']),
+    removeAllLinks() {
+      this.removeAll().then(() => {
+        this.msg = 'They have been removed'
+      });
+    },
+
     lineItemStatusIcon(lineItemTitle) {
       const projectLineItems = this.project.project_line_items;
 

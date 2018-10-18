@@ -6,6 +6,16 @@
           {{ selectedItemTitle }}
         </div>
 
+        <div class="title">
+          {{ globalTitle }}
+        </div>
+
+        <ul>
+          <li v-for="(link, index) in links" v-bind:key="index">
+            {{ link }}
+          </li>
+        </ul>
+
         <div class="action-icons">
           <div class="update-icon">
             <a @click.prevent="updateLineItem">
@@ -91,6 +101,7 @@
 
 <script>
 import axios from 'axios';
+import { mapState } from 'vuex';
 
 export default {
   name: 'ProjectCardDetails',
@@ -123,6 +134,13 @@ export default {
   props: {
     selectedItemTitle: String,
     project: Object
+  },
+
+  computed: {
+    ...mapState([
+      'globalTitle',
+      'links'
+    ]),
   },
 
   methods: {
