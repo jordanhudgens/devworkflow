@@ -23,7 +23,7 @@
     </div>
 
     <div class="line-items">
-      <a v-for="(title, idx) in lineItemTitles" :key="idx" class="small-link" @click.prevent="showDetails(title)">
+      <a v-for="(title, idx) in lineItemTitles" :key="idx" class="small-link" @click.prevent="setSelectedProjectItemTitle(title)">
         <div class="line-item">
           <span :class="lineItemStatusIcon(title)"></span>
           <span class="title">
@@ -63,6 +63,7 @@ export default {
   data() {
     return {
       showArchiveLink: false,
+      newLink: null,
       lineItemTitles: [
         "Wireframes",
         "Sitemap",
@@ -76,10 +77,6 @@ export default {
         "Deployment"
       ]
     }
-  },
-
-  mounted() {
-    console.log("Project obj", this.project);
   },
 
   props: {
@@ -110,8 +107,14 @@ export default {
 
   methods: {
     ...mapMutations([
-      'ADD_LINK'
+      'ADD_LINK',
+      'SET_SELECTED_PROJECT_ITEM_TITLE'
     ]),
+    setSelectedProjectItemTitle: function(title) {
+      console.log("Title", title);
+      this.showDetails(title);
+      this.SET_SELECTED_PROJECT_ITEM_TITLE(title)
+    },
     addLink: function() {
       this.ADD_LINK(this.newLink)
       this.newLink = ''

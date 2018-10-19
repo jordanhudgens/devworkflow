@@ -3,11 +3,7 @@
     <div class="content">
       <div class="card-header">
         <div class="title">
-          {{ selectedItemTitle }}
-        </div>
-
-        <div class="title">
-          {{ globalTitle }}
+          {{ selectedProjectItemTitle }}
         </div>
 
         <ul>
@@ -139,7 +135,8 @@ export default {
   computed: {
     ...mapState([
       'globalTitle',
-      'links'
+      'links',
+      'selectedProjectItemTitle'
     ]),
   },
 
