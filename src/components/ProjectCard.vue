@@ -5,18 +5,6 @@
         {{ project.title }}
       </div>
 
-      <p>There are currently {{ countLinks }} links</p>
-
-      <button v-on:click="removeLinks(index)" class="rm">Remove</button>
-
-      <hr>
-
-      <button v-on:click="removeAllLinks">Remove all links</button>
-
-      <form @submit.prevent="addLink">
-        <input class="link-input" type="text" placeholder="Add a Link" v-model="newLink" />
-      </form>
-
       <div class="main-objective">
         {{ project.main_objective }}
       </div>
@@ -63,7 +51,6 @@ export default {
   data() {
     return {
       showArchiveLink: false,
-      newLink: null,
       lineItemTitles: [
         "Wireframes",
         "Sitemap",
@@ -107,32 +94,11 @@ export default {
 
   methods: {
     ...mapMutations([
-      'ADD_LINK',
       'SET_SELECTED_PROJECT_ITEM_TITLE'
     ]),
     setSelectedProjectItemTitle: function(title) {
-      console.log("Title", title);
       this.showDetails(title);
       this.SET_SELECTED_PROJECT_ITEM_TITLE(title)
-    },
-    addLink: function() {
-      this.ADD_LINK(this.newLink)
-      this.newLink = ''
-    },
-
-    ...mapActions([                  // Add this
-      'removeLink'
-    ]),
-    removeLinks: function(link) {    // Add this
-      this.removeLink(link)
-    },
-
-    ...mapMutations(['REMOVE_ALL']),
-    ...mapActions(['removeAll']),
-    removeAllLinks() {
-      this.removeAll().then(() => {
-        this.msg = 'They have been removed'
-      });
     },
 
     lineItemStatusIcon(lineItemTitle) {

@@ -6,12 +6,6 @@
           {{ selectedProjectItemTitle }}
         </div>
 
-        <ul>
-          <li v-for="(link, index) in links" v-bind:key="index">
-            {{ link }}
-          </li>
-        </ul>
-
         <div class="action-icons">
           <div class="update-icon">
             <a @click.prevent="updateLineItem">
@@ -134,8 +128,6 @@ export default {
 
   computed: {
     ...mapState([
-      'globalTitle',
-      'links',
       'selectedProjectItemTitle'
     ]),
   },
