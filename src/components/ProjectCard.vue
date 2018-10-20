@@ -89,13 +89,8 @@ export default {
   },
 
   methods: {
-    ...mapMutations([
-      'SET_SELECTED_PROJECT_ITEM_TITLE'
-    ]),
-
     setSelectedProjectItemTitle: function(title) {
       this.showDetails(title);
-      this.SET_SELECTED_PROJECT_ITEM_TITLE(title)
     },
 
     lineItemStatusIcon(lineItemTitle) {
@@ -113,7 +108,6 @@ export default {
     },
 
     showDetails(title) {
-      console.log("pli id", this.project)
       this.$emit("showCardDetails", { title: title, projectId: this.project.id });
     },
 

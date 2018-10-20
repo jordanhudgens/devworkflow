@@ -17,7 +17,7 @@
         <div class="project-card-and-detail-wrapper">
           <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" @showCardDetails="handleCardLineItemClick" />
           <transition name="fade">
-            <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" :selectedItemTitle="selectedLineItem.title" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
+            <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
           </transition>
         </div>
       </div>
@@ -47,10 +47,6 @@ export default {
       statusLinkText: 'Archived',
       projects: [],
       activeModal: false,
-      selectedLineItem: {
-        title: null,
-        projectId: null
-      }
     }
   },
 
@@ -63,20 +59,11 @@ export default {
 
   computed: {
     ...mapGetters([
-      'currentProjectItemTitle'
+      'currentProjectItem'
     ]),
   },
 
   methods: {
-    ...mapActions([
-      'getSelectedProjectItem',
-      'setSelectedProjectId'
-    ]),
-
-    getSelectedProjectItems: function(projectLineItemId) {
-      this.getSelectedProjectItem(projectLineItemId)
-    },
-
     ...mapMutations([
       'SET_SELECTED_PROJECT_ITEM'
     ]),
@@ -105,15 +92,18 @@ export default {
           })
         }
       })
+
+      this.shouldExpandCard(res.projectId);
     },
 
     closeCard() {
-      this.selectedLineItem.title = null;
-      this.selectedLineItem.projectId = null;
+      // TODO create clear action and call from here
+      // this.selectedLineItem.title = null;
+      // this.selectedLineItem.projectId = null;
     },
 
     shouldExpandCard(projectId) {
-      if (projectId === this.selectedLineItem.projectId) {
+      if (this.currentProjectItem && projectId === this.currentProjectItem.project_id) {
         return true;
       } else {
         return false;

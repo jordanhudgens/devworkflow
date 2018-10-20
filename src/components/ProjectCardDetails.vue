@@ -3,7 +3,7 @@
     <div class="content">
       <div class="card-header">
         <div class="title">
-          {{ selectedProjectItemTitle }}
+          {{ currentProjectItem.title }}
         </div>
 
         <div class="action-icons">
@@ -21,15 +21,11 @@
         </div>
       </div>
 
-      <div v-if="loading">
-        <i class="fas fa-spinner"></i>
-      </div>
-
-      <div v-else-if="selectedProjectLineItem">
+      <div>
         <!-- Start of description edit process  -->
         <div v-if="!descriptionEditMode" class="card-details-description" @click.prevent="editDescription">
-          <div v-if="selectedProjectLineItem.description">
-            {{ selectedProjectLineItem.description }}
+          <div v-if="currentProjectItem.description">
+            {{ currentProjectItem.description }}
           </div>
 
           <div v-else class="placeholder-text">
@@ -38,7 +34,7 @@
         </div>
 
         <div v-else class="form-wrapper">
-          <input v-model="selectedProjectLineItem.description" placeholder="Description goes here" class="full-width-element">
+          <input v-model="currentProjectItem.description" placeholder="Description goes here" class="full-width-element">
           <a @click.prevent="descriptionEditMode = false" class="cancel">
             <i class="fas fa-times"></i> Cancel
           </a>
@@ -84,7 +80,7 @@
     </div>
 
     <div class="status">
-      <p-check class="p-switch p-fill" color="success" v-model="selectedProjectLineItem.completed">Completed?</p-check>
+      <p-check class="p-switch p-fill" color="success" v-model="currentProjectItem.completed">Completed?</p-check>
     </div>
   </div>
 </template>
@@ -99,42 +95,20 @@ export default {
   data() {
     return {
       updateLineItemUrl: "https://devworkflow-api.herokuapp.com/project_line_items/",
-      loading: true,
-      selectedProjectLineItem: {},
       descriptionEditMode: false,
       listItems: [],
       listItemForms: []
     }
   },
 
-  beforeMount() {
-    this.setSelectedItem();
-  },
-
-  beforeUpdate() {
-    this.setSelectedItem();
-  },
-
-  watch: {
-    selectedProjectLineItem: function(oldVal, newVal) {
-      this.getListItems(oldVal.id);
-    }
-  },
-
-  props: {
-    selectedItemTitle: String,
-    project: Object
-  },
-
   computed: {
     ...mapGetters([
-      'currentProjectItemTitle'
+      'currentProjectItem'
     ]),
   },
 
   methods: {
     addListItem() {
-      console.log("Adding list item")
       this.listItemForms.push({ title: 'asdfsdf' })
     },
 
@@ -142,39 +116,18 @@ export default {
       this.descriptionEditMode = true;
     },
 
-    setSelectedItem() {
-      this.selectedProjectLineItem = this.project.project_line_items.find(pli => {
-        return pli.title === this.selectedItemTitle
-      });
-      this.loading = false;
-    },
-
     closeCard() {
-      this.selectedProjectLineItem = {}
       this.$emit("closeCard");
-    },
-
-    getListItems(projectLineItemId) {
-      this.listItems = [];
-
-      axios
-        .get(`https://devworkflow-api.herokuapp.com/project_line_items/${projectLineItemId}`, { withCredentials: true })
-        .then(response => {
-          this.listItems.push(...response.data.project_line_item.check_list_items);
-        })
-        .catch(error => {
-          console.log(error);
-        });
     },
 
     updateLineItem() {
       axios
         .patch(
-        this.updateLineItemUrl + this.selectedProjectLineItem.id,
+        this.updateLineItemUrl + this.currentProjectItem.id,
         {
           project_line_item: {
-            description: this.selectedProjectLineItem.description,
-            completed: this.selectedProjectLineItem.completed
+            description: this.currentProjectItem.description,
+            completed: this.currentProjectItem.completed
           }
         },
         { withCredentials: true },
