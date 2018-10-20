@@ -65,10 +65,16 @@ export default {
 
   methods: {
     ...mapMutations([
-      'SET_SELECTED_PROJECT_ITEM'
+      'SET_SELECTED_PROJECT_ITEM',
+      'CLEAR_SELECTED_PROJECT_ITEM'
     ]),
+
     setSelectedProjectItem: function(projectItem) {
       this.SET_SELECTED_PROJECT_ITEM(projectItem)
+    },
+
+    clearSelectedProjectItem: function(projectItem) {
+      this.CLEAR_SELECTED_PROJECT_ITEM()
     },
 
     updateProjectLineItem(res) {
@@ -97,9 +103,7 @@ export default {
     },
 
     closeCard() {
-      // TODO create clear action and call from here
-      // this.selectedLineItem.title = null;
-      // this.selectedLineItem.projectId = null;
+      this.clearSelectedProjectItem();
     },
 
     shouldExpandCard(projectId) {

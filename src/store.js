@@ -18,6 +18,10 @@ export default new Vuex.Store({
   mutations: {
     SET_SELECTED_PROJECT_ITEM: (state, selectedProjectItem) => {
       state.selectedProjectItem = selectedProjectItem;
+    },
+
+    CLEAR_SELECTED_PROJECT_ITEM: state => {
+      state.selectedProjectItem = null;
     }
   },
 

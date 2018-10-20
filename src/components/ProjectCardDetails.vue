@@ -133,6 +133,7 @@ export default {
         { withCredentials: true },
       )
         .then(response => {
+          console.log("updatinggg.", response);
           this.$emit('updateProjectLineItem', response.data);
           this.closeCard();
         })
