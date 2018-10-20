@@ -91,7 +91,7 @@
 
 <script>
 import axios from 'axios';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'ProjectCardDetails',
@@ -127,8 +127,8 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'selectedProjectItemTitle'
+    ...mapGetters([
+      'currentProjectItemTitle'
     ]),
   },
 

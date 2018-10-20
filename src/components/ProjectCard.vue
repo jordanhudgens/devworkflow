@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
 import axios from 'axios';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'ProjectCard',
@@ -71,10 +71,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters([
-      'countLinks'
-    ]),
-
     archiveApiUrl: function() {
       if (this.project.status === 'active') {
         return `https://devworkflow-api.herokuapp.com/archived_projects/${this.project.id}`
@@ -96,6 +92,7 @@ export default {
     ...mapMutations([
       'SET_SELECTED_PROJECT_ITEM_TITLE'
     ]),
+
     setSelectedProjectItemTitle: function(title) {
       this.showDetails(title);
       this.SET_SELECTED_PROJECT_ITEM_TITLE(title)
@@ -116,6 +113,7 @@ export default {
     },
 
     showDetails(title) {
+      console.log("pli id", this.project)
       this.$emit("showCardDetails", { title: title, projectId: this.project.id });
     },
 

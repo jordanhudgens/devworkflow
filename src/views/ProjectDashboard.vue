@@ -33,6 +33,7 @@ import NewProject from '@/components/NewProject';
 import ProjectDashboardNav from '@/components/ProjectDashboardNav';
 import ProjectCard from '@/components/ProjectCard';
 import ProjectCardDetails from '@/components/ProjectCardDetails';
+import { mapActions, mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'ProjectDashboard',
@@ -60,7 +61,29 @@ export default {
     ProjectCardDetails,
   },
 
+  computed: {
+    ...mapGetters([
+      'currentProjectItemTitle'
+    ]),
+  },
+
   methods: {
+    ...mapActions([
+      'getSelectedProjectItem',
+      'setSelectedProjectId'
+    ]),
+
+    getSelectedProjectItems: function(projectLineItemId) {
+      this.getSelectedProjectItem(projectLineItemId)
+    },
+
+    ...mapMutations([
+      'SET_SELECTED_PROJECT_ITEM'
+    ]),
+    setSelectedProjectItem: function(projectItem) {
+      this.SET_SELECTED_PROJECT_ITEM(projectItem)
+    },
+
     updateProjectLineItem(res) {
       const projectId = res.project_line_item.project.id;
 
@@ -73,8 +96,15 @@ export default {
     },
 
     handleCardLineItemClick(res) {
-      this.selectedLineItem.title = res.title;
-      this.selectedLineItem.projectId = res.projectId;
+      this.projects.forEach(project => {
+        if (project.id === res.projectId) {
+          project.project_line_items.forEach(pli => {
+            if (pli.title === res.title) {
+              this.setSelectedProjectItem(pli);
+            }
+          })
+        }
+      })
     },
 
     closeCard() {
