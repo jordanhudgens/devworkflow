@@ -17,6 +17,7 @@
 
 <script>
 import Auth from '@/components/Auth'
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'home',
@@ -26,7 +27,14 @@ export default {
   },
 
   methods: {
-    handleSuccessfulAuth() {
+    ...mapMutations([
+      'SET_CURRENT_USER',
+      'SET_LOGIN_STATUS'
+    ]),
+
+    handleSuccessfulAuth(user) {
+      this.SET_CURRENT_USER(user);
+      this.SET_LOGIN_STATUS('LOGGED_IN');
       this.$router.push({
         name: 'ProjectDashboard',
       });

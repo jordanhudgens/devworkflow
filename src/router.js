@@ -5,7 +5,7 @@ import ProjectDashboard from "@/views/ProjectDashboard.vue";
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   mode: "history",
   routes: [
     {
@@ -16,7 +16,10 @@ export default new Router({
     {
       path: "/dashboard",
       name: "ProjectDashboard",
-      component: ProjectDashboard
+      component: ProjectDashboard,
+      meta: { requiresLogin: true }
     }
   ]
 });
+
+export default router;

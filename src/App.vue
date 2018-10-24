@@ -1,44 +1,50 @@
 <template>
-  <div v-if="!isLoading" id="app">
-    <router-view/>
+  <div id="app">
+    <div v-if="isLoading">
+      Loading...
+    </div>
+    <router-view v-else />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import loggedIn from '@/helpers/loggedIn';
+import { mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
   name: "App",
 
-  data() {
-    return {
-      isLoading: true
-    }
+  computed: {
+    ...mapState([
+      'isLoading'
+    ])
   },
 
   beforeMount() {
-    this.checkLogin();
+    this.getLoadingStatus();
+  },
+
+  updated() {
+    if (this.getLoginStatus() === 'LOGGED_IN') {
+      this.$router.push({
+        name: 'ProjectDashboard',
+      });
+    } else {
+      this.$router.push({
+        name: 'home',
+      });
+    }
   },
 
   methods: {
-    checkLogin() {
-      loggedIn().then(res => {
-        if (res.logged_in) {
-          this.$router.push({
-            name: 'ProjectDashboard',
-          });
-        } else {
-          this.$router.push({
-            name: 'home',
-          });
-        }
+    ...mapGetters([
+      'getLoadingStatus',
+      'getLoginStatus',
+    ]),
 
-        this.isLoading = false;
-      }).catch(error => {
-        console.log(error);
-      })
-    }
+    ...mapMutations([
+      'SET_LOADING_STATUS',
+    ])
   }
 }
 </script>

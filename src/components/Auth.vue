@@ -89,7 +89,9 @@ export default {
         { withCredentials: true },
       )
         .then(response => {
-          this.$emit('register', response.data);
+          if (response.data.status === 'created') {
+            this.$emit('register', response.data.user);
+          }
         })
         .catch(error => {
           this.$emit('registrationError', error);
@@ -110,7 +112,7 @@ export default {
       )
         .then(response => {
           if (response.data.status === 'created') {
-            this.$emit('login', response.data);
+            this.$emit('login', response.data.user);
           }
         })
         .catch(error => {

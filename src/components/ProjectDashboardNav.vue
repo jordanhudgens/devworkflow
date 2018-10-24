@@ -37,6 +37,7 @@
 <script>
 import axios from 'axios';
 import '@/compiled-icons/white-bottega-logo';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'ProjectDashboardNav',
@@ -51,12 +52,19 @@ export default {
   },
 
   methods: {
+    ...mapMutations([
+      'SET_CURRENT_USER',
+      'SET_LOGIN_STATUS'
+    ]),
+
     signOut() {
       axios
         .delete(`https://devworkflow-api.herokuapp.com/logout`, {
           withCredentials: true,
         })
         .then(response => {
+          this.SET_CURRENT_USER(null);
+          this.SET_LOGIN_STATUS('NOT_LOGGED_IN');
           this.$router.push({
             name: 'home',
           });

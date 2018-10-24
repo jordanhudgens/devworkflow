@@ -34,6 +34,7 @@ import ProjectDashboardNav from '@/components/ProjectDashboardNav';
 import ProjectCard from '@/components/ProjectCard';
 import ProjectCardDetails from '@/components/ProjectCardDetails';
 import { mapActions, mapMutations, mapGetters } from 'vuex';
+import store from '../store.js';
 
 export default {
   name: 'ProjectDashboard',

@@ -16,8 +16,9 @@ Vue.use(VueSweetalert2);
 
 Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+store.dispatch("storeCheckLoginStatus"),
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount("#app");
