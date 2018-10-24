@@ -10,8 +10,7 @@ export default new Vuex.Store({
     selectedProjectItem: null,
     user: null,
     loggedInStatus: "NOT_LOGGED_IN",
-    isLoading: true,
-    selectedCard: null
+    isLoading: true
   },
 
   getters: {
@@ -29,22 +28,10 @@ export default new Vuex.Store({
 
     getLoadingStatus: state => {
       return state.isLoading;
-    },
-
-    getSelectedCard: state => {
-      return state.selectedCard;
     }
   },
 
   mutations: {
-    SET_SELECTED_CARD: (state, selectedCard) => {
-      state.selectedCard = selectedCard;
-    },
-
-    CLEAR_SELECTED_CARD: state => {
-      state.selectedCard = null;
-    },
-
     SET_SELECTED_PROJECT_ITEM: (state, selectedProjectItem) => {
       state.selectedProjectItem = selectedProjectItem;
     },

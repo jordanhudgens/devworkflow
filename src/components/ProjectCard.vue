@@ -11,7 +11,7 @@
     </div>
 
     <div class="line-items">
-      <a v-for="(title, idx) in lineItemTitles" :key="idx" class="small-link" @click.prevent="setSelectedProjectItemTitle(title)">
+      <a v-for="(title, idx) in lineItemTitles" :key="idx" class="small-link" @click.prevent="setSelectedProjectItem(project, title)">
         <div class="line-item">
           <span :class="lineItemStatusIcon(title)"></span>
           <span class="title">
@@ -43,7 +43,7 @@
 
 <script>
 import axios from 'axios';
-import { mapMutations } from 'vuex';
+import { mapMutations, mapActions } from 'vuex';
 
 export default {
   name: 'ProjectCard',
@@ -89,8 +89,13 @@ export default {
   },
 
   methods: {
-    setSelectedProjectItemTitle: function(title) {
-      this.showDetails(title);
+    ...mapMutations([
+      'SET_SELECTED_PROJECT_ITEM',
+    ]),
+
+    setSelectedProjectItem(project, title) {
+      // TODO Get projects in vuex store instead of local state
+      this.SET_SELECTED_PROJECT_ITEM(project, title);
     },
 
     lineItemStatusIcon(lineItemTitle) {
@@ -105,10 +110,6 @@ export default {
       }
 
       return 'incompleted-circle';
-    },
-
-    showDetails(title) {
-      this.$emit("showCardDetails", { title: title, projectId: this.project.id });
     },
 
     toggleArchiveLink() {
