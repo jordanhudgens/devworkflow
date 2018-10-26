@@ -32,7 +32,13 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    SET_SELECTED_PROJECT_ITEM: (state, selectedProjectItem) => {
+    // Update the selected project item from here
+    SET_SELECTED_PROJECT_ITEM: (state, payload) => {
+      const selectedProjectItem = payload.selectedProject.project_line_items.filter(
+        selectedTitle => {
+          selectedTitle.title === payload.title;
+        }
+      );
       state.selectedProjectItem = selectedProjectItem;
     },
 

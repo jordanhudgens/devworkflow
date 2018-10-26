@@ -11,14 +11,16 @@
     </div>
 
     <div class="line-items">
-      <a v-for="(title, idx) in lineItemTitles" :key="idx" class="small-link" @click.prevent="setSelectedProjectItem(project, title)">
-        <div class="line-item">
-          <span :class="lineItemStatusIcon(title)"></span>
-          <span class="title">
-            {{ title }}
-          </span>
-        </div>
-      </a>
+      <div v-for="(title, idx) in lineItemTitles" :key="idx">
+        <a class="small-link" @click.prevent="setSelectedProjectItem(project, title)">
+          <div class="line-item">
+            <span :class="lineItemStatusIcon(title)"></span>
+            <span class="title">
+              {{ title }}
+            </span>
+          </div>
+        </a>
+      </div>
     </div>
 
     <transition name="fade">
@@ -94,8 +96,8 @@ export default {
     ]),
 
     setSelectedProjectItem(project, title) {
-      // TODO Get projects in vuex store instead of local state
-      this.SET_SELECTED_PROJECT_ITEM(project, title);
+      const payload = { selectedProject: project, title: title };
+      this.SET_SELECTED_PROJECT_ITEM(payload);
     },
 
     lineItemStatusIcon(lineItemTitle) {
