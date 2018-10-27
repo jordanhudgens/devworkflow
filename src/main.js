@@ -6,7 +6,7 @@ import PrettyCheckbox from "pretty-checkbox-vue";
 
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import store from "./store/index.js";
 import VueSVGIcon from "vue-svgicon";
 
 Vue.use(VueSVGIcon);
