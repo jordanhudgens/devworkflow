@@ -4,6 +4,8 @@
 
     <ProjectDashboardNav :statusLinkText="statusLinkText" @toggle="toggleStatus" />
 
+    <h1>{{currentProjectLoadingStatus}}</h1>
+
     <div class="project-cards-wrapper">
       <div class="new-project" @click="newProjectModal" v-if="statusLinkText === 'Archived'">
         <div class='title'>New Project</div>
@@ -13,12 +15,15 @@
         </div>
       </div>
 
-      <div v-for="project in projects" :key="project.id">
-        <div class="project-card-and-detail-wrapper">
-          <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" @showCardDetails="handleCardLineItemClick" />
-          <transition name="fade">
-            <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
-          </transition>
+      <!-- TODO Fix the class wrapper so the cards show to the side instead of on top of each other  -->
+      <div v-if="currentProjectLoadingStatus">
+        <div v-for="project in getProjects" :key="project.id">
+          <div class="project-card-and-detail-wrapper">
+            <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" @showCardDetails="handleCardLineItemClick" />
+            <transition name="fade">
+              <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
+            </transition>
+          </div>
         </div>
       </div>
     </div>
@@ -33,19 +38,18 @@ import NewProject from '@/components/NewProject';
 import ProjectDashboardNav from '@/components/ProjectDashboardNav';
 import ProjectCard from '@/components/ProjectCard';
 import ProjectCardDetails from '@/components/ProjectCardDetails';
-import { mapActions, mapMutations, mapGetters } from 'vuex';
+import { mapActions, mapMutations, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'ProjectDashboard',
 
-  mounted() {
-    this.getProjects();
+  beforeMount() {
+    this.retrieveProjects();
   },
 
   data() {
     return {
       statusLinkText: 'Archived',
-      projects: [],
       activeModal: false,
     }
   },
@@ -59,7 +63,14 @@ export default {
 
   computed: {
     ...mapGetters([
-      'currentProjectItem'
+      'currentProjectItem',
+      'currentProjectLoadingStatus',
+      'getProjects'
+    ]),
+
+    ...mapState([
+      'projects',
+      'projectsLoaded'
     ]),
   },
 
@@ -67,6 +78,10 @@ export default {
     ...mapMutations([
       'SET_SELECTED_PROJECT_ITEM',
       'CLEAR_SELECTED_PROJECT_ITEM'
+    ]),
+
+    ...mapActions([
+      'retrieveProjects'
     ]),
 
     setSelectedProjectItem: function(projectItem) {
@@ -137,17 +152,6 @@ export default {
     getArchivedProjects() {
       axios
         .get(`https://devworkflow-api.herokuapp.com/archived_projects`, { withCredentials: true })
-        .then(response => {
-          this.projects.push(...response.data.projects);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
-
-    getProjects() {
-      axios
-        .get(`https://devworkflow-api.herokuapp.com/projects`, { withCredentials: true })
         .then(response => {
           this.projects.push(...response.data.projects);
         })
