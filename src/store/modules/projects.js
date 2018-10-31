@@ -3,7 +3,8 @@ import axios from "axios";
 const state = {
   projects: [],
   selectedProjectItem: null,
-  projectsLoaded: false
+  projectsLoaded: false,
+  statusLinkText: "Archived"
 };
 
 const getters = {
@@ -17,10 +18,18 @@ const getters = {
 
   getProjects: state => {
     return state.projects;
+  },
+
+  getStatusLinkText: state => {
+    return state.statusLinkText;
   }
 };
 
 const mutations = {
+  SET_STATUS_LINK_TEXT: (state, linkText) => {
+    state.statusLinkText = linkText;
+  },
+
   SET_SELECTED_PROJECT_ITEM: (state, payload) => {
     const selectedProjectItem = payload.selectedProject.project_line_items.filter(
       selectedTitle => {

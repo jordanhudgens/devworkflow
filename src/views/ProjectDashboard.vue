@@ -2,10 +2,10 @@
   <div class="project-dashboard-wrapper">
     <NewProject :activeModal="activeModal" @addNewProject="addNewProject" @resetActiveModal="resetActiveModal" />
 
-    <ProjectDashboardNav :statusLinkText="statusLinkText" @toggle="toggleStatus" />
+    <ProjectDashboardNav :statusLinkText="getStatusLinkText" @toggle="toggleStatus" />
 
     <div class="project-cards-wrapper">
-      <div class="new-project" @click="newProjectModal" v-if="statusLinkText === 'Archived'">
+      <div class="new-project" @click="newProjectModal" v-if="getStatusLinkText === 'Archived'">
         <div class='title'>New Project</div>
 
         <div class="icon">
@@ -44,7 +44,6 @@ export default {
 
   data() {
     return {
-      statusLinkText: 'Archived',
       activeModal: false,
     }
   },
@@ -60,7 +59,8 @@ export default {
     ...mapGetters([
       'currentProjectItem',
       'currentProjectLoadingStatus',
-      'getProjects'
+      'getProjects',
+      'getStatusLinkText'
     ]),
 
     ...mapState([
@@ -72,18 +72,19 @@ export default {
   methods: {
     ...mapMutations([
       'SET_SELECTED_PROJECT_ITEM',
-      'CLEAR_SELECTED_PROJECT_ITEM'
+      'CLEAR_SELECTED_PROJECT_ITEM',
+      'SET_STATUS_LINK_TEXT'
     ]),
 
     ...mapActions([
       'retrieveProjects'
     ]),
 
-    setSelectedProjectItem: function(projectItem) {
+    setSelectedProjectItem() {
       this.SET_SELECTED_PROJECT_ITEM(projectItem)
     },
 
-    clearSelectedProjectItem: function(projectItem) {
+    clearSelectedProjectItem() {
       this.CLEAR_SELECTED_PROJECT_ITEM()
     },
 
@@ -144,6 +145,7 @@ export default {
       })
     },
 
+    // TODO move archiving process to store
     getArchivedProjects() {
       axios
         .get(`https://devworkflow-api.herokuapp.com/archived_projects`, { withCredentials: true })
@@ -158,12 +160,12 @@ export default {
     toggleStatus() {
       this.projects = [];
 
-      if (this.statusLinkText === 'Archived') {
+      if (this.getStatusLinkText === 'Archived') {
         this.getArchivedProjects();
-        this.statusLinkText = 'Active';
+        this.SET_STATUS_LINK_TEXT('Active');
       } else {
-        this.getProjects();
-        this.statusLinkText = 'Archived';
+        this.retrieveProjects();
+        this.SET_STATUS_LINK_TEXT('Archived');
       }
     },
   }
