@@ -4,8 +4,6 @@
 
     <ProjectDashboardNav :statusLinkText="statusLinkText" @toggle="toggleStatus" />
 
-    <h1>{{currentProjectLoadingStatus}}</h1>
-
     <div class="project-cards-wrapper">
       <div class="new-project" @click="newProjectModal" v-if="statusLinkText === 'Archived'">
         <div class='title'>New Project</div>
@@ -15,15 +13,12 @@
         </div>
       </div>
 
-      <!-- TODO Fix the class wrapper so the cards show to the side instead of on top of each other  -->
-      <div v-if="currentProjectLoadingStatus">
-        <div v-for="project in getProjects" :key="project.id">
-          <div class="project-card-and-detail-wrapper">
-            <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" @showCardDetails="handleCardLineItemClick" />
-            <transition name="fade">
-              <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
-            </transition>
-          </div>
+      <div v-if="currentProjectLoadingStatus" class="retrieved-project-cards">
+        <div v-for="project in getProjects" :key="project.id" class="project-card-and-detail-wrapper">
+          <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" @showCardDetails="handleCardLineItemClick" />
+          <transition name="fade">
+            <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
+          </transition>
         </div>
       </div>
     </div>
