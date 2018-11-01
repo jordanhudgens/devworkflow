@@ -140,7 +140,7 @@ export default {
             { withCredentials: true }
             )
             .then(response => {
-              this.$emit('handleProjectStatusChange', this.project.id);
+              this.$emit('handleProjectStatusChange', this.project);
               return response.data;
             })
             .catch(error => {
@@ -154,18 +154,7 @@ export default {
     },
 
     toggleProjectStatus() {
-      axios
-        .patch(
-        this.archiveApiUrl,
-        {},
-        { withCredentials: true },
-      )
-        .then(response => {
-          this.$emit('handleProjectStatusChange', this.project.id);
-        })
-        .catch(error => {
-          console.log('errorrr', error);
-        });
+      this.$emit('handleProjectStatusChange', this.project);
     },
 
   }

@@ -4,7 +4,8 @@ const state = {
   projects: [],
   selectedProjectItem: null,
   projectsLoaded: false,
-  statusLinkText: "Archived"
+  statusLinkText: "Archived",
+  projectApiUrl: "https://devworkflow-api.herokuapp.com/projects"
 };
 
 const getters = {
@@ -47,21 +48,39 @@ const mutations = {
     state.projects = projects;
   },
 
+  ADD_TO_PROJECTS: (state, project) => {
+    state.projects.unshift(project);
+  },
+
   SET_LOADING_STATUS: (state, status) => {
     state.projectsLoaded = status;
+  },
+
+  REMOVE_FROM_PROJECT_LIST: (state, projectToRemove) => {
+    state.projects = state.projects.filter(project => {
+      return project.id !== projectToRemove.id;
+    });
+  },
+
+  SET_PROJECT_API_URL: (state, status) => {
+    if (status === "ARCHIVE") {
+      state.projectApiUrl =
+        "https://devworkflow-api.herokuapp.com/archived_projects";
+    } else if (status === "ACTIVE") {
+      state.projectApiUrl = "https://devworkflow-api.herokuapp.com/projects";
+    }
   }
 };
 
 const actions = {
   retrieveProjects: context => {
     axios
-      .get(`https://devworkflow-api.herokuapp.com/projects`, {
+      .get(state.projectApiUrl, {
         withCredentials: true
       })
       .then(response => {
         context.commit("SET_PROJECTS", response.data.projects);
         context.commit("SET_LOADING_STATUS", true);
-        console.log("loading status", state.projectsLoaded);
       })
       .catch(error => {
         console.log(error);

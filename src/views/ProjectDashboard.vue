@@ -73,7 +73,10 @@ export default {
     ...mapMutations([
       'SET_SELECTED_PROJECT_ITEM',
       'CLEAR_SELECTED_PROJECT_ITEM',
-      'SET_STATUS_LINK_TEXT'
+      'SET_STATUS_LINK_TEXT',
+      'SET_PROJECT_API_URL',
+      'REMOVE_FROM_PROJECT_LIST',
+      'ADD_TO_PROJECTS'
     ]),
 
     ...mapActions([
@@ -126,7 +129,7 @@ export default {
     },
 
     addNewProject(project) {
-      this.projects.unshift(project);
+      this.ADD_TO_PROJECTS(project);
     },
 
     resetActiveModal(data) {
@@ -137,24 +140,15 @@ export default {
       this.activeModal = true;
     },
 
-    handleProjectStatusChange(projectId) {
-      this.projects = this.projects.filter(project => {
-        if (project.id != projectId) {
-          return project;
-        }
-      })
+    // Remove project from project list
+    handleProjectStatusChange(projectToRemove) {
+      this.REMOVE_FROM_PROJECT_LIST(projectToRemove);
     },
 
-    // TODO move archiving process to store
+    // Fix bug that flickers the projects before showing archive
     getArchivedProjects() {
-      axios
-        .get(`https://devworkflow-api.herokuapp.com/archived_projects`, { withCredentials: true })
-        .then(response => {
-          this.projects.push(...response.data.projects);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      this.SET_PROJECT_API_URL('ARCHIVE');
+      this.retrieveProjects();
     },
 
     toggleStatus() {
