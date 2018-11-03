@@ -73,6 +73,13 @@ const mutations = {
 };
 
 const actions = {
+  updateProjectStatus: (context, status) => {
+    // TODO
+    // Updated status on server
+    // either 'active' or 'archived'
+    // completed is a separate field
+  },
+
   retrieveProjects: context => {
     axios
       .get(state.projectApiUrl, {

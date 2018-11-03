@@ -140,8 +140,8 @@ export default {
       this.activeModal = true;
     },
 
-    // Remove project from project list
     handleProjectStatusChange(projectToRemove) {
+      console.log("projectToRemove", projectToRemove);
       this.REMOVE_FROM_PROJECT_LIST(projectToRemove);
     },
 
