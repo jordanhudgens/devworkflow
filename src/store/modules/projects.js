@@ -73,11 +73,21 @@ const mutations = {
 };
 
 const actions = {
-  updateProjectStatus: (context, status) => {
-    // TODO
-    // Updated status on server
-    // either 'active' or 'archived'
-    // completed is a separate field
+  updateProjectStatus: (context, id) => {
+    axios
+      .patch(
+        `https://devworkflow-api.herokuapp.com/projects/${id}`,
+        { project: { status: state.statusLinkText.toLowerCase() } },
+        { withCredentials: true }
+      )
+      .then(response => {
+        state.projects = state.projects.filter(project => {
+          return project.id !== response.data.project.id;
+        });
+      })
+      .catch(error => {
+        console.log("errorrr", error);
+      });
   },
 
   retrieveProjects: context => {

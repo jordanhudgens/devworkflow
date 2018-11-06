@@ -69,6 +69,10 @@ export default {
     ]),
   },
 
+  updated() {
+    console.log("updated...")
+  },
+
   methods: {
     ...mapMutations([
       'SET_SELECTED_PROJECT_ITEM',
@@ -76,7 +80,8 @@ export default {
       'SET_STATUS_LINK_TEXT',
       'SET_PROJECT_API_URL',
       'REMOVE_FROM_PROJECT_LIST',
-      'ADD_TO_PROJECTS'
+      'ADD_TO_PROJECTS',
+      'SET_LOADING_STATUS'
     ]),
 
     ...mapActions([
@@ -94,7 +99,7 @@ export default {
     updateProjectLineItem(res) {
       const projectId = res.project_line_item.project.id;
 
-      for (let project of this.projects) {
+      for (let project of this.getProjects()) {
         if (project.id === projectId) {
           project.project_line_items = project.project_line_items.filter(pli => pli.id !== res.project_line_item.id);
           project.project_line_items.push(res.project_line_item)
@@ -103,7 +108,7 @@ export default {
     },
 
     handleCardLineItemClick(res) {
-      this.projects.forEach(project => {
+      this.getProjects().forEach(project => {
         if (project.id === res.projectId) {
           project.project_line_items.forEach(pli => {
             if (pli.title === res.title) {
@@ -147,19 +152,24 @@ export default {
 
     // Fix bug that flickers the projects before showing archive
     getArchivedProjects() {
-      this.SET_PROJECT_API_URL('ARCHIVE');
       this.retrieveProjects();
     },
 
     toggleStatus() {
-      this.projects = [];
+      this.SET_LOADING_STATUS(true);
 
       if (this.getStatusLinkText === 'Archived') {
-        this.getArchivedProjects();
+        this.SET_PROJECT_API_URL('ARCHIVE');
         this.SET_STATUS_LINK_TEXT('Active');
       } else {
-        this.retrieveProjects();
+        this.SET_PROJECT_API_URL('ACTIVE');
         this.SET_STATUS_LINK_TEXT('Archived');
+      }
+
+      this.SET_LOADING_STATUS(false);
+
+      if (!this.currentProjectLoadingStatus) {
+        this.retrieveProjects();
       }
     },
   }

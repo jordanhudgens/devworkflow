@@ -32,7 +32,7 @@
           </span>
         </a>
 
-        <a class="archive-link" @click.prevent="toggleProjectStatus">
+        <a class="archive-link" @click.prevent="toggleProjectStatus(project.id)">
           <i class="fas fa-archive"></i>
           <span class="title">
             {{ archiveActionText }}
@@ -45,7 +45,7 @@
 
 <script>
 import axios from 'axios';
-import { mapMutations, mapActions } from 'vuex';
+import { mapMutations, mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'ProjectCard',
@@ -87,12 +87,20 @@ export default {
       } else {
         return 'Unarchive';
       }
-    }
+    },
+
+    ...mapGetters([
+      'getStatusLinkText'
+    ]),
   },
 
   methods: {
     ...mapMutations([
       'SET_SELECTED_PROJECT_ITEM',
+    ]),
+
+    ...mapActions([
+      'updateProjectStatus',
     ]),
 
     setSelectedProjectItem(project, title) {
@@ -153,8 +161,8 @@ export default {
       });
     },
 
-    toggleProjectStatus() {
-      this.$emit('handleProjectStatusChange', this.project);
+    toggleProjectStatus(id) {
+      this.updateProjectStatus(id)
     },
 
   }
