@@ -150,7 +150,8 @@ export default {
       this.REMOVE_FROM_PROJECT_LIST(projectToRemove);
     },
 
-    // Fix bug that flickers the projects before showing archive
+    // TODO
+    // build out the ability to save multiple todo items
     getArchivedProjects() {
       this.retrieveProjects();
     },
