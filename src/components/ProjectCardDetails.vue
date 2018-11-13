@@ -127,7 +127,6 @@ export default {
       // Remove the save feature and have it save automatically for each element.
       // 
       // Check list item:
-      // Add to the API
       // Take response and add to list of check list items
       // Hide the form
       // Clear the form
