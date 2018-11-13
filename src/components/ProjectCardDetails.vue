@@ -71,7 +71,7 @@
 
           <div v-if="getNewCheckListItemFormStatus" class="form-element">
             <form @submit.prevent="addToCheckListItems">
-              <input type="text" placeholder="Content here">
+              <input type="text" placeholder="Checklist item" required>
             </form>
           </div>
 
@@ -138,7 +138,6 @@ export default {
       // 
       // Check list item:
       // Have a bar that shows the percent complete for the check list items
-      // Validation to ensure that an empty string can't be submitted
       this.createCheckListItem(event.target[0].value);
     },
 
