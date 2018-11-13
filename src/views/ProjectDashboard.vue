@@ -17,7 +17,7 @@
         <div v-for="project in getProjects" :key="project.id" class="project-card-and-detail-wrapper">
           <ProjectCard :project="project" @handleProjectStatusChange="handleProjectStatusChange" @showCardDetails="handleCardLineItemClick" />
           <transition name="fade">
-            <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" @closeCard="closeCard" @updateProjectLineItem="updateProjectLineItem" />
+            <ProjectCardDetails v-if="shouldExpandCard(project.id)" :project="project" @updateProjectLineItem="updateProjectLineItem" />
           </transition>
         </div>
       </div>
@@ -76,7 +76,6 @@ export default {
   methods: {
     ...mapMutations([
       'SET_SELECTED_PROJECT_ITEM',
-      'CLEAR_SELECTED_PROJECT_ITEM',
       'SET_STATUS_LINK_TEXT',
       'SET_PROJECT_API_URL',
       'REMOVE_FROM_PROJECT_LIST',
@@ -90,10 +89,6 @@ export default {
 
     setSelectedProjectItem() {
       this.SET_SELECTED_PROJECT_ITEM(projectItem)
-    },
-
-    clearSelectedProjectItem() {
-      this.CLEAR_SELECTED_PROJECT_ITEM()
     },
 
     updateProjectLineItem(res) {
@@ -119,10 +114,6 @@ export default {
       })
 
       this.shouldExpandCard(res.projectId);
-    },
-
-    closeCard() {
-      this.clearSelectedProjectItem();
     },
 
     shouldExpandCard(projectId) {

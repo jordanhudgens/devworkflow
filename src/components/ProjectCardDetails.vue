@@ -87,14 +87,13 @@
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'ProjectCardDetails',
 
   data() {
     return {
-      updateLineItemUrl: "https://devworkflow-api.herokuapp.com/project_line_items/",
       descriptionEditMode: false,
       listItems: [],
       listItemForms: []
@@ -108,6 +107,14 @@ export default {
   },
 
   methods: {
+    ...mapMutations([
+      'CLEAR_SELECTED_PROJECT_ITEM'
+    ]),
+
+    ...mapActions([
+      'updateProductLineItem',
+    ]),
+
     addListItem() {
       this.listItemForms.push({ title: 'asdfsdf' })
     },
@@ -117,29 +124,11 @@ export default {
     },
 
     closeCard() {
-      this.$emit("closeCard");
+      this.CLEAR_SELECTED_PROJECT_ITEM()
     },
 
     updateLineItem() {
-      axios
-        .patch(
-        this.updateLineItemUrl + this.currentProjectItem.id,
-        {
-          project_line_item: {
-            description: this.currentProjectItem.description,
-            completed: this.currentProjectItem.completed
-          }
-        },
-        { withCredentials: true },
-      )
-        .then(response => {
-          console.log("updatinggg.", response);
-          this.$emit('updateProjectLineItem', response.data);
-          this.closeCard();
-        })
-        .catch(error => {
-          console.log('errorrr', error);
-        });
+      this.updateProductLineItem();
     }
   }
 }

@@ -102,6 +102,31 @@ const actions = {
       .catch(error => {
         console.log(error);
       });
+  },
+
+  updateProductLineItem: context => {
+    axios
+      .patch(
+        "https://devworkflow-api.herokuapp.com/project_line_items/" +
+          state.selectedProjectItem.id,
+        {
+          project_line_item: {
+            description: state.selectedProjectItem.description,
+            completed: state.selectedProjectItem.completed,
+            check_list_items_attributes: [
+              { title: "Some title" },
+              { title: "Another title" }
+            ]
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(response => {
+        context.commit("CLEAR_SELECTED_PROJECT_ITEM");
+      })
+      .catch(error => {
+        console.log("errorrr", error);
+      });
   }
 };
 
