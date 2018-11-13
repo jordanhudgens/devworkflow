@@ -67,7 +67,9 @@
           </div>
 
           <div v-if="getNewCheckListItemFormStatus" class="form-element">
-            <input type="text" placeholder="Content here">
+            <form @submit.prevent="addToCheckListItems">
+              <input type="text" placeholder="Content here">
+            </form>
           </div>
 
         </div>
@@ -92,7 +94,6 @@ export default {
   data() {
     return {
       descriptionEditMode: false,
-      listItemForms: []
     }
   },
 
@@ -113,12 +114,27 @@ export default {
 
     ...mapActions([
       'updateProductLineItem',
+      'createCheckListItem'
     ]),
 
     toggleNewCheckListItemForm() {
-      console.log("listitem forms", this.listItemForms);
       this.TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS();
-      // this.ADD_TO_CHECK_LIST_ITEMS({ title: item })
+    },
+
+    addToCheckListItems(event) {
+      // TODO
+      // Overall:
+      // Remove the save feature and have it save automatically for each element.
+      // 
+      // Check list item:
+      // Add to the API
+      // Take response and add to list of check list items
+      // Hide the form
+      // Clear the form
+      // Set back to base state when card is closed
+      // Validation to ensure that an empty string can't be submitted
+      // this.ADD_TO_CHECK_LIST_ITEMS(event.target[0].value);
+      this.createCheckListItem(event.target[0].value);
     },
 
     editDescription() {

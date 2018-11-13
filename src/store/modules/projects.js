@@ -130,17 +130,34 @@ const actions = {
         {
           project_line_item: {
             description: state.selectedProjectItem.description,
-            completed: state.selectedProjectItem.completed,
-            check_list_items_attributes: [
-              { title: "Some title" },
-              { title: "Another title" }
-            ]
+            completed: state.selectedProjectItem.completed
           }
         },
         { withCredentials: true }
       )
       .then(response => {
         context.commit("CLEAR_SELECTED_PROJECT_ITEM");
+      })
+      .catch(error => {
+        console.log("errorrr", error);
+      });
+  },
+
+  createCheckListItem: (context, title) => {
+    axios
+      .post(
+        "https://devworkflow-api.herokuapp.com/check_list_items/",
+        {
+          check_list_item: {
+            title: title,
+            completed: false,
+            project_line_item_id: state.selectedProjectItem.id
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(response => {
+        console.log("response", response);
       })
       .catch(error => {
         console.log("errorrr", error);
