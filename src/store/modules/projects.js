@@ -67,7 +67,7 @@ const mutations = {
   },
 
   ADD_TO_CHECK_LIST_ITEMS: (state, checkListItem) => {
-    state.checkListItems.push(checkListItem);
+    state.selectedProjectItem.check_list_items.push(checkListItem);
   },
 
   SET_LOADING_STATUS: (state, status) => {
@@ -114,6 +114,7 @@ const actions = {
         withCredentials: true
       })
       .then(response => {
+        console.log("retrieved projects", response.data.projects);
         context.commit("SET_PROJECTS", response.data.projects);
         context.commit("SET_LOADING_STATUS", true);
       })

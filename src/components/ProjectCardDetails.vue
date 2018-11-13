@@ -57,8 +57,8 @@
             </a>
           </div>
 
-          <div v-if="currentCheckListItems.length > 0">
-            <div v-for="listItem in currentCheckListItems" :key="listItem.id" class="list-item">
+          <div v-if="currentProjectItem.check_list_items.length > 0">
+            <div v-for="listItem in currentProjectItem.check_list_items" :key="listItem.id" class="list-item">
               {{ listItem.title }}
             </div>
           </div>
@@ -127,9 +127,7 @@ export default {
       // Remove the save feature and have it save automatically for each element.
       // 
       // Check list item:
-      // Take response and add to list of check list items
-      // Hide the form
-      // Clear the form
+      // Render the check list items from the API when details are opened
       // Set back to base state when card is closed
       // Validation to ensure that an empty string can't be submitted
       // this.ADD_TO_CHECK_LIST_ITEMS(event.target[0].value);
