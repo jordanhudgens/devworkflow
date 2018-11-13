@@ -127,10 +127,11 @@ export default {
       // Remove the save feature and have it save automatically for each element.
       // 
       // Check list item:
-      // Render the check list items from the API when details are opened
-      // Set back to base state when card is closed
+      // Style the check list items
+      // 'Turn' the add button to an x when the toggle is set to true
+      // Add the ability to 'complete a check list item
+      // Have a bar that shows the percent complete for the check list items
       // Validation to ensure that an empty string can't be submitted
-      // this.ADD_TO_CHECK_LIST_ITEMS(event.target[0].value);
       this.createCheckListItem(event.target[0].value);
     },
 

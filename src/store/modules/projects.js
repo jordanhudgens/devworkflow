@@ -52,6 +52,7 @@ const mutations = {
       }
     );
     state.selectedProjectItem = selectedProjectItem[0];
+    state.showNewCheckListItemForm = false;
   },
 
   CLEAR_SELECTED_PROJECT_ITEM: state => {
