@@ -104,6 +104,9 @@ const actions = {
       });
   },
 
+  // TODO
+  // Get values for check list items
+
   updateProductLineItem: context => {
     axios
       .patch(
