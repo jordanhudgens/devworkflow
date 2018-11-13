@@ -169,6 +169,26 @@ const actions = {
       .catch(error => {
         console.log("errorrr", error);
       });
+  },
+
+  updateCheckListItemCompleteStatus: (context, checkListItem) => {
+    axios
+      .patch(
+        "https://devworkflow-api.herokuapp.com/check_list_items/" +
+          checkListItem.id,
+        {
+          check_list_item: {
+            completed: !checkListItem.completed
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(response => {
+        console.log("response", response);
+      })
+      .catch(error => {
+        console.log("errorrr", error);
+      });
   }
 };
 

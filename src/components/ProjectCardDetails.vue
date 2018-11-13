@@ -59,7 +59,9 @@
 
           <div v-if="currentProjectItem.check_list_items.length > 0">
             <div v-for="listItem in currentProjectItem.check_list_items" :key="listItem.id" class="list-item">
-              <p-check name="check" color="success" v-model="listItem.completed">{{ listItem.title }}</p-check>
+              <a @click.prevent="toggleCheckListItemCompleteStatus(listItem)">
+                <p-check name="check" color="success" v-model="listItem.completed">{{ listItem.title }}</p-check>
+              </a>
             </div>
           </div>
           <div v-else class="placeholder-text">
@@ -114,11 +116,18 @@ export default {
 
     ...mapActions([
       'updateProductLineItem',
-      'createCheckListItem'
+      'createCheckListItem',
+      'updateCheckListItemCompleteStatus'
     ]),
 
     toggleNewCheckListItemForm() {
       this.TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS();
+    },
+
+    toggleCheckListItemCompleteStatus(listItem) {
+      // console.log("Mark me completed!!", listItem)
+      this.updateCheckListItemCompleteStatus(listItem);
+      listItem.completed = !listItem.completed;
     },
 
     addToCheckListItems(event) {
@@ -127,9 +136,7 @@ export default {
       // Remove the save feature and have it save automatically for each element.
       // 
       // Check list item:
-      // Style the check list items
       // 'Turn' the add button to an x when the toggle is set to true
-      // Add the ability to 'complete a check list item
       // Have a bar that shows the percent complete for the check list items
       // Validation to ensure that an empty string can't be submitted
       this.createCheckListItem(event.target[0].value);
