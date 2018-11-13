@@ -52,7 +52,8 @@
 
             <a class="link" @click.prevent="toggleNewCheckListItemForm">
               <h3 class="teal">
-                <i class="fas fa-plus-circle"></i>
+                <i v-if="!getNewCheckListItemFormStatus" class="fas fa-plus-circle"></i>
+                <i v-else class="fas fa-times-circle"></i>
               </h3>
             </a>
           </div>
@@ -136,7 +137,6 @@ export default {
       // Remove the save feature and have it save automatically for each element.
       // 
       // Check list item:
-      // 'Turn' the add button to an x when the toggle is set to true
       // Have a bar that shows the percent complete for the check list items
       // Validation to ensure that an empty string can't be submitted
       this.createCheckListItem(event.target[0].value);
