@@ -59,7 +59,7 @@
 
           <div v-if="currentProjectItem.check_list_items.length > 0">
             <div v-for="listItem in currentProjectItem.check_list_items" :key="listItem.id" class="list-item">
-              {{ listItem.title }}
+              <p-check name="check" color="success" v-model="listItem.completed">{{ listItem.title }}</p-check>
             </div>
           </div>
           <div v-else class="placeholder-text">
