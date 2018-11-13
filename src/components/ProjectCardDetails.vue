@@ -50,15 +50,15 @@
               <i class="fas fa-clipboard-list"></i> Checklist
             </h3>
 
-            <a class="link" @click.prevent="addListItem">
+            <a class="link" @click.prevent="toggleNewCheckListItemForm">
               <h3 class="teal">
                 <i class="fas fa-plus-circle"></i>
               </h3>
             </a>
           </div>
 
-          <div v-if="listItems.length > 0">
-            <div v-for="listItem in listItems" :key="listItem.id" class="list-item">
+          <div v-if="currentCheckListItems.length > 0">
+            <div v-for="listItem in currentCheckListItems" :key="listItem.id" class="list-item">
               {{ listItem.title }}
             </div>
           </div>
@@ -66,11 +66,8 @@
             No checklist items added yet
           </div>
 
-          <div v-if="listItemForms.length > 0">
-            <div v-for="(listItemForm, idx) in listItemForms" :key="idx" class="form-element">
-              <input type="text" placeholder="Content here">
-              <!-- TODO <ListItemForm :formElements="formElements" :id="idx" @update="updateListItemValues" />  -->
-            </div>
+          <div v-if="getNewCheckListItemFormStatus" class="form-element">
+            <input type="text" placeholder="Content here">
           </div>
 
         </div>
@@ -95,28 +92,33 @@ export default {
   data() {
     return {
       descriptionEditMode: false,
-      listItems: [],
       listItemForms: []
     }
   },
 
   computed: {
     ...mapGetters([
-      'currentProjectItem'
+      'currentProjectItem',
+      'currentCheckListItems',
+      'getNewCheckListItemFormStatus'
     ]),
   },
 
   methods: {
     ...mapMutations([
-      'CLEAR_SELECTED_PROJECT_ITEM'
+      'CLEAR_SELECTED_PROJECT_ITEM',
+      'ADD_TO_CHECK_LIST_ITEMS',
+      'TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS'
     ]),
 
     ...mapActions([
       'updateProductLineItem',
     ]),
 
-    addListItem() {
-      this.listItemForms.push({ title: 'asdfsdf' })
+    toggleNewCheckListItemForm() {
+      console.log("listitem forms", this.listItemForms);
+      this.TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS();
+      // this.ADD_TO_CHECK_LIST_ITEMS({ title: item })
     },
 
     editDescription() {

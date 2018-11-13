@@ -5,7 +5,9 @@ const state = {
   selectedProjectItem: null,
   projectsLoaded: false,
   statusLinkText: "Archived",
-  projectApiUrl: "https://devworkflow-api.herokuapp.com/projects"
+  projectApiUrl: "https://devworkflow-api.herokuapp.com/projects",
+  checkListItems: [],
+  showNewCheckListItemForm: false
 };
 
 const getters = {
@@ -21,6 +23,14 @@ const getters = {
     return state.projects;
   },
 
+  currentCheckListItems: state => {
+    return state.checkListItems;
+  },
+
+  getNewCheckListItemFormStatus: state => {
+    return state.showNewCheckListItemForm;
+  },
+
   getStatusLinkText: state => {
     return state.statusLinkText;
   }
@@ -29,6 +39,10 @@ const getters = {
 const mutations = {
   SET_STATUS_LINK_TEXT: (state, linkText) => {
     state.statusLinkText = linkText;
+  },
+
+  TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS: state => {
+    state.showNewCheckListItemForm = !state.showNewCheckListItemForm;
   },
 
   SET_SELECTED_PROJECT_ITEM: (state, payload) => {
@@ -50,6 +64,10 @@ const mutations = {
 
   ADD_TO_PROJECTS: (state, project) => {
     state.projects.unshift(project);
+  },
+
+  ADD_TO_CHECK_LIST_ITEMS: (state, checkListItem) => {
+    state.checkListItems.push(checkListItem);
   },
 
   SET_LOADING_STATUS: (state, status) => {
@@ -103,9 +121,6 @@ const actions = {
         console.log(error);
       });
   },
-
-  // TODO
-  // Get values for check list items
 
   updateProductLineItem: context => {
     axios
