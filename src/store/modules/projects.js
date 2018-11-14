@@ -68,7 +68,11 @@ const mutations = {
   },
 
   ADD_TO_CHECK_LIST_ITEMS: (state, checkListItem) => {
-    state.selectedProjectItem.check_list_items.push(checkListItem);
+    if (state.selectedProjectItem.check_list_items) {
+      state.selectedProjectItem.check_list_items.push(checkListItem);
+    } else {
+      state.selectedProjectItem.check_list_items = [checkListItem];
+    }
   },
 
   SET_LOADING_STATUS: (state, status) => {
@@ -88,6 +92,19 @@ const mutations = {
     } else if (status === "ACTIVE") {
       state.projectApiUrl = "https://devworkflow-api.herokuapp.com/projects";
     }
+  },
+
+  UPDATE_CHECK_LIST_ITEM_STATUS: (state, listItem) => {
+    const checkListItems = state.selectedProjectItem.check_list_items.map(
+      li => {
+        if (li.id === listItem.id) {
+          li.completed = listItem.completed;
+        }
+
+        return li;
+      }
+    );
+    state.selectedProjectItem.check_list_items = checkListItems;
   }
 };
 
@@ -115,7 +132,6 @@ const actions = {
         withCredentials: true
       })
       .then(response => {
-        console.log("retrieved projects", response.data.projects);
         context.commit("SET_PROJECTS", response.data.projects);
         context.commit("SET_LOADING_STATUS", true);
       })
@@ -184,7 +200,10 @@ const actions = {
         { withCredentials: true }
       )
       .then(response => {
-        console.log("response", response);
+        context.commit(
+          "UPDATE_CHECK_LIST_ITEM_STATUS",
+          response.data.check_list_item
+        );
       })
       .catch(error => {
         console.log("errorrr", error);

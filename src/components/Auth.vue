@@ -116,7 +116,6 @@ export default {
           }
         })
         .catch(error => {
-          console.log("error", error);
           this.$emit('authError', error);
         });
     },

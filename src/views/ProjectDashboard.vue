@@ -69,10 +69,6 @@ export default {
     ]),
   },
 
-  updated() {
-    console.log("updated...")
-  },
-
   methods: {
     ...mapMutations([
       'SET_SELECTED_PROJECT_ITEM',
@@ -137,12 +133,9 @@ export default {
     },
 
     handleProjectStatusChange(projectToRemove) {
-      console.log("projectToRemove", projectToRemove);
       this.REMOVE_FROM_PROJECT_LIST(projectToRemove);
     },
 
-    // TODO
-    // build out the ability to save multiple todo items
     getArchivedProjects() {
       this.retrieveProjects();
     },

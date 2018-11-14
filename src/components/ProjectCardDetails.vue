@@ -104,7 +104,7 @@ export default {
     ...mapGetters([
       'currentProjectItem',
       'currentCheckListItems',
-      'getNewCheckListItemFormStatus'
+      'getNewCheckListItemFormStatus',
     ]),
   },
 
@@ -118,7 +118,8 @@ export default {
     ...mapActions([
       'updateProductLineItem',
       'createCheckListItem',
-      'updateCheckListItemCompleteStatus'
+      'updateCheckListItemCompleteStatus',
+      'retrieveListItemCompletionStatus'
     ]),
 
     toggleNewCheckListItemForm() {
@@ -126,9 +127,7 @@ export default {
     },
 
     toggleCheckListItemCompleteStatus(listItem) {
-      // console.log("Mark me completed!!", listItem)
       this.updateCheckListItemCompleteStatus(listItem);
-      listItem.completed = !listItem.completed;
     },
 
     addToCheckListItems(event) {
