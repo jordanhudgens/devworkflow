@@ -7,12 +7,6 @@
         </div>
 
         <div class="action-icons">
-          <div class="update-icon">
-            <a @click.prevent="updateLineItem">
-              <i class="fas fa-save"></i>
-            </a>
-          </div>
-
           <div class="close-icon">
             <a @click.prevent="closeCard">
               <i class="fas fa-times-circle"></i>
