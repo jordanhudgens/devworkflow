@@ -71,7 +71,7 @@
 
           <div v-if="getNewCheckListItemFormStatus" class="form-element">
             <form @submit.prevent="addToCheckListItems">
-              <input type="text" placeholder="Checklist item" required>
+              <input ref="checkListInput" type="text" placeholder="Checklist item" required>
             </form>
           </div>
 
@@ -124,6 +124,9 @@ export default {
 
     toggleNewCheckListItemForm() {
       this.TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS();
+      if (this.getNewCheckListItemFormStatus) {
+        this.$nextTick(() => this.$refs.checkListInput.focus())
+      }
     },
 
     toggleCheckListItemCompleteStatus(listItem) {
@@ -134,9 +137,6 @@ export default {
       // TODO
       // Overall:
       // Remove the save feature and have it save automatically for each element.
-      // 
-      // Check list item:
-      // Have a bar that shows the percent complete for the check list items
       this.createCheckListItem(event.target[0].value);
       event.target[0].value = "";
     },
