@@ -28,8 +28,12 @@
         </div>
 
         <div v-else class="form-wrapper">
-          <input v-model="currentProjectItem.description" placeholder="Description goes here" class="full-width-element">
-          <a @click.prevent="descriptionEditMode = false" class="cancel">
+          <!-- TODO  -->
+          <!-- Wrap input in form  -->
+          <!-- If cancel is pressed, switch back to previous value of description  -->
+          <!-- If enter is pressed, update on API  -->
+          <input ref="description" v-model="currentProjectItem.description" placeholder="Description goes here" class="full-width-element">
+          <a @click.prevent="cancelDescriptionEdit" class="cancel">
             <i class="fas fa-times"></i> Cancel
           </a>
         </div>
@@ -140,6 +144,17 @@ export default {
 
     editDescription() {
       this.descriptionEditMode = true;
+
+      if (this.descriptionEditMode) {
+        this.$nextTick(() => this.$refs.description.focus())
+      }
+    },
+
+    cancelDescriptionEdit(event) {
+      this.descriptionEditMode = false;
+      if (!this.descriptionEditMode) {
+        this.$nextTick(() => this.$refs.description = "")
+      }
     },
 
     closeCard() {
