@@ -105,6 +105,10 @@ const mutations = {
       }
     );
     state.selectedProjectItem.check_list_items = checkListItems;
+  },
+
+  TOGGLE_SELECTED_ITEM_COMPLETE_STATUS: state => {
+    state.selectedProjectItem.completed = !state.selectedProjectItem.completed;
   }
 };
 
@@ -153,9 +157,7 @@ const actions = {
         },
         { withCredentials: true }
       )
-      .then(response => {
-        context.commit("CLEAR_SELECTED_PROJECT_ITEM");
-      })
+      .then(response => {})
       .catch(error => {
         console.log("errorrr", error);
       });

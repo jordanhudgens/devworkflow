@@ -76,7 +76,9 @@
     </div>
 
     <div class="status">
-      <p-check class="p-switch p-fill" color="success" v-model="currentProjectItem.completed">Completed?</p-check>
+      <a @click.prevent="toggleSelectedProjectItemCompleteState">
+        <p-check class="p-switch p-fill" color="success" v-model="currentProjectItem.completed">Completed?</p-check>
+      </a>
     </div>
   </div>
 </template>
@@ -106,7 +108,8 @@ export default {
     ...mapMutations([
       'CLEAR_SELECTED_PROJECT_ITEM',
       'ADD_TO_CHECK_LIST_ITEMS',
-      'TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS'
+      'TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS',
+      'TOGGLE_SELECTED_ITEM_COMPLETE_STATUS'
     ]),
 
     ...mapActions([
@@ -141,6 +144,11 @@ export default {
 
     closeCard() {
       this.CLEAR_SELECTED_PROJECT_ITEM()
+    },
+
+    toggleSelectedProjectItemCompleteState() {
+      this.TOGGLE_SELECTED_ITEM_COMPLETE_STATUS();
+      this.updateProductLineItem();
     },
 
     updateLineItem() {
