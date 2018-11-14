@@ -138,6 +138,7 @@ export default {
       // Check list item:
       // Have a bar that shows the percent complete for the check list items
       this.createCheckListItem(event.target[0].value);
+      event.target[0].value = "";
     },
 
     editDescription() {

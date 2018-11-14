@@ -179,8 +179,6 @@ const actions = {
           "ADD_TO_CHECK_LIST_ITEMS",
           response.data.check_list_item
         );
-
-        context.commit("TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS");
       })
       .catch(error => {
         console.log("errorrr", error);
