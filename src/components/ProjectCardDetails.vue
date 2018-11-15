@@ -76,6 +76,10 @@
         </div>
         <!-- end of check list  -->
 
+        <!-- TODO  -->
+        <!-- image uploads  -->
+        <!-- https://github.com/rowanwins/vue-dropzone  -->
+
       </div>
     </div>
 
