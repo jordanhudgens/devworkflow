@@ -7,7 +7,8 @@ const state = {
   statusLinkText: "Archived",
   projectApiUrl: "https://devworkflow-api.herokuapp.com/projects",
   checkListItems: [],
-  showNewCheckListItemForm: false
+  showNewCheckListItemForm: false,
+  temporaryDescription: ""
 };
 
 const getters = {
@@ -33,10 +34,22 @@ const getters = {
 
   getStatusLinkText: state => {
     return state.statusLinkText;
+  },
+
+  getTemporaryDescription: state => {
+    return state.temporaryDescription;
   }
 };
 
 const mutations = {
+  SET_TEMPORARY_DESCRIPTION: (state, description) => {
+    state.temporaryDescription = description;
+  },
+
+  UPDATE_SELECTED_PROJECT_ITEM_DESCRIPTION: (state, description) => {
+    state.selectedProjectItem.description = description;
+  },
+
   SET_STATUS_LINK_TEXT: (state, linkText) => {
     state.statusLinkText = linkText;
   },

@@ -29,10 +29,10 @@
 
         <div v-else class="form-wrapper">
           <!-- TODO  -->
-          <!-- Wrap input in form  -->
           <!-- If cancel is pressed, switch back to previous value of description  -->
-          <!-- If enter is pressed, update on API  -->
-          <input ref="description" v-model="currentProjectItem.description" placeholder="Description goes here" class="full-width-element">
+          <form @submit.prevent="updateDescription">
+            <input ref="description" @keyup="handleDescriptionChange" :value="currentProjectItem.description" placeholder="Description goes here" class="full-width-element">
+          </form>
           <a @click.prevent="cancelDescriptionEdit" class="cancel">
             <i class="fas fa-times"></i> Cancel
           </a>
@@ -105,6 +105,7 @@ export default {
       'currentProjectItem',
       'currentCheckListItems',
       'getNewCheckListItemFormStatus',
+      'getTemporaryDescription'
     ]),
   },
 
@@ -113,7 +114,9 @@ export default {
       'CLEAR_SELECTED_PROJECT_ITEM',
       'ADD_TO_CHECK_LIST_ITEMS',
       'TOGGLE_NEW_CHECK_LIST_ITEM_FORM_STATUS',
-      'TOGGLE_SELECTED_ITEM_COMPLETE_STATUS'
+      'TOGGLE_SELECTED_ITEM_COMPLETE_STATUS',
+      'UPDATE_SELECTED_PROJECT_ITEM_DESCRIPTION',
+      'SET_TEMPORARY_DESCRIPTION'
     ]),
 
     ...mapActions([
@@ -152,9 +155,6 @@ export default {
 
     cancelDescriptionEdit(event) {
       this.descriptionEditMode = false;
-      if (!this.descriptionEditMode) {
-        this.$nextTick(() => this.$refs.description = "")
-      }
     },
 
     closeCard() {
@@ -168,6 +168,16 @@ export default {
 
     updateLineItem() {
       this.updateProductLineItem();
+    },
+
+    handleDescriptionChange(event) {
+      this.SET_TEMPORARY_DESCRIPTION(event.target.value);
+    },
+
+    updateDescription() {
+      this.UPDATE_SELECTED_PROJECT_ITEM_DESCRIPTION(this.getTemporaryDescription);
+      this.updateProductLineItem();
+      this.descriptionEditMode = false;
     }
   }
 }
