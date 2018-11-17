@@ -80,6 +80,10 @@
         <!-- image uploads  -->
         <!-- https://github.com/rowanwins/vue-dropzone  -->
 
+        <div class="img-list-wrapper">
+          <vue2Dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue2Dropzone>
+        </div>
+
       </div>
     </div>
 
@@ -94,6 +98,13 @@
 <script>
 import axios from 'axios';
 import { mapGetters, mapActions, mapMutations } from 'vuex';
+import vue2Dropzone from 'vue2-dropzone';
+import 'vue2-dropzone/dist/vue2Dropzone.min.css';
+
+// TODO
+// Connect dropzone with live api for immediate uploads
+// Fix thumb width issue where 'remove' box takes up too much room
+// Enable the ability to delete from the server
 
 export default {
   name: 'ProjectCardDetails',
@@ -101,7 +112,19 @@ export default {
   data() {
     return {
       descriptionEditMode: false,
+      dropzoneOptions: {
+        url: 'https://httpbin.org/post',
+        thumbnailWidth: 200,
+        maxFilesize: 0.5,
+        addRemoveLinks: true,
+        dictDefaultMessage: "<i class='fa fa-cloud-upload'></i>UPLOAD ME",
+        headers: { "My-Awesome-Header": "header value" }
+      }
     }
+  },
+
+  components: {
+    vue2Dropzone
   },
 
   computed: {
