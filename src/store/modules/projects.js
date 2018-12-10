@@ -8,12 +8,17 @@ const state = {
   projectApiUrl: "https://devworkflow-api.herokuapp.com/projects",
   checkListItems: [],
   showNewCheckListItemForm: false,
-  temporaryDescription: ""
+  temporaryDescription: "",
+  dropzoneOptions: null
 };
 
 const getters = {
   currentProjectItem: state => {
     return state.selectedProjectItem;
+  },
+
+  currentDropzoneOptions: state => {
+    return state.dropzoneOptions;
   },
 
   currentProjectLoadingStatus: state => {
@@ -66,6 +71,19 @@ const mutations = {
     );
     state.selectedProjectItem = selectedProjectItem[0];
     state.showNewCheckListItemForm = false;
+    state.dropzoneOptions = {
+      url: `https://devworkflow-api.herokuapp.com/project_line_items/${state
+        .selectedProjectItem.id}`,
+      method: "put",
+      thumbnailWidth: 150,
+      maxFilesize: 1,
+      addRemoveLinks: true,
+      dictDefaultMessage: `<i class="fas fa-cloud-upload-alt"></i> Upload Images`,
+      paramName: "project_line_item[item_images][]",
+      headers: {
+        withCredentials: true
+      }
+    };
   },
 
   CLEAR_SELECTED_PROJECT_ITEM: state => {
@@ -215,6 +233,31 @@ const actions = {
       .then(response => {
         context.commit(
           "UPDATE_CHECK_LIST_ITEM_STATUS",
+          response.data.check_list_item
+        );
+      })
+      .catch(error => {
+        console.log("errorrr", error);
+      });
+  },
+
+  uploadImages: (context, imagesObject) => {
+    // TODO maybe use form
+    axios
+      .post(
+        "https://devworkflow-api.herokuapp.com/project_line_items",
+        {
+          check_list_item: {
+            title: title,
+            completed: false,
+            project_line_item_id: state.selectedProjectItem.id
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(response => {
+        context.commit(
+          "ADD_TO_CHECK_LIST_ITEMS",
           response.data.check_list_item
         );
       })

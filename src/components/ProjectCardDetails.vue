@@ -80,8 +80,8 @@
         <!-- image uploads  -->
         <!-- https://github.com/rowanwins/vue-dropzone  -->
 
-        <div class="img-list-wrapper">
-          <vue2Dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue2Dropzone>
+        <div v-if="currentDropzoneOptions" class="img-list-wrapper">
+          <vue2Dropzone ref="itemImgDropzone" id="item-img-dropzone" :options="currentDropzoneOptions"></vue2Dropzone>
         </div>
 
       </div>
@@ -102,9 +102,9 @@ import vue2Dropzone from 'vue2-dropzone';
 import 'vue2-dropzone/dist/vue2Dropzone.min.css';
 
 // TODO
-// Connect dropzone with live api for immediate uploads
 // Fix thumb width issue where 'remove' box takes up too much room
 // Enable the ability to delete from the server
+// Render out images above the uploader, deletion and ability to zoom (modal)
 
 export default {
   name: 'ProjectCardDetails',
@@ -112,14 +112,6 @@ export default {
   data() {
     return {
       descriptionEditMode: false,
-      dropzoneOptions: {
-        url: 'https://httpbin.org/post',
-        thumbnailWidth: 200,
-        maxFilesize: 0.5,
-        addRemoveLinks: true,
-        dictDefaultMessage: "<i class='fa fa-cloud-upload'></i>UPLOAD ME",
-        headers: { "My-Awesome-Header": "header value" }
-      }
     }
   },
 
@@ -132,7 +124,8 @@ export default {
       'currentProjectItem',
       'currentCheckListItems',
       'getNewCheckListItemFormStatus',
-      'getTemporaryDescription'
+      'getTemporaryDescription',
+      'currentDropzoneOptions'
     ]),
   },
 
@@ -165,9 +158,6 @@ export default {
     },
 
     addToCheckListItems(event) {
-      // TODO
-      // Overall:
-      // Remove the save feature and have it save automatically for each element.
       this.createCheckListItem(event.target[0].value);
       event.target[0].value = "";
     },
@@ -205,7 +195,18 @@ export default {
       this.UPDATE_SELECTED_PROJECT_ITEM_DESCRIPTION(this.getTemporaryDescription);
       this.updateProductLineItem();
       this.descriptionEditMode = false;
-    }
+    },
+
+    buildImageForm() {
+      let formData = new FormData();
+
+      if (this.$refs.itemImgDropzone.getAcceptedFiles().length > 0) {
+        for (let img of this.$refs.itemImgDropzone.getAcceptedFiles()) {
+          formData.append("project_line_item[item_images_raw][]", img.dataURL);
+        }
+      }
+      return formData;
+    },
   }
 }
 </script>
