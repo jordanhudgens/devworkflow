@@ -195,18 +195,7 @@ export default {
       this.UPDATE_SELECTED_PROJECT_ITEM_DESCRIPTION(this.getTemporaryDescription);
       this.updateProductLineItem();
       this.descriptionEditMode = false;
-    },
-
-    buildImageForm() {
-      let formData = new FormData();
-
-      if (this.$refs.itemImgDropzone.getAcceptedFiles().length > 0) {
-        for (let img of this.$refs.itemImgDropzone.getAcceptedFiles()) {
-          formData.append("project_line_item[item_images_raw][]", img.dataURL);
-        }
-      }
-      return formData;
-    },
+    }
   }
 }
 </script>

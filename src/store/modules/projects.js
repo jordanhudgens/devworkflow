@@ -239,31 +239,6 @@ const actions = {
       .catch(error => {
         console.log("errorrr", error);
       });
-  },
-
-  uploadImages: (context, imagesObject) => {
-    // TODO maybe use form
-    axios
-      .post(
-        "https://devworkflow-api.herokuapp.com/project_line_items",
-        {
-          check_list_item: {
-            title: title,
-            completed: false,
-            project_line_item_id: state.selectedProjectItem.id
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
-        context.commit(
-          "ADD_TO_CHECK_LIST_ITEMS",
-          response.data.check_list_item
-        );
-      })
-      .catch(error => {
-        console.log("errorrr", error);
-      });
   }
 };
 
